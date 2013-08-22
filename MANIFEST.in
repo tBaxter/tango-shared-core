@@ -1,0 +1,7 @@
+include LICENSE README
+recursive-include tango_shared *.py *.html *.js
+
+recursive-include include docs/ *
+
+recursive-include tango_shared/static/ *
+recursive-include tango_shared/templates/ *
