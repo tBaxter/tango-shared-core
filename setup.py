@@ -10,7 +10,7 @@ setup(
     url='https://github.com/tBaxter/tango-shared-core',
     license='LICENSE',
     description='Tango shared/core functionality.',
-    long_description=open('README.txt').read(),
+    long_description=open('README.md').read(),
     packages=find_packages(),
     zip_safe=False,
     include_package_data=True
