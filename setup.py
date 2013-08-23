@@ -7,7 +7,6 @@ setup(
     version='0.2',
     author=u'Tim Baxter',
     author_email='mail.baxter@gmail.com',
-    packages=['tango_shared'],
     url='https://github.com/tBaxter/tango-shared-core',
     license='LICENSE',
     description='Tango shared/core functionality.',
