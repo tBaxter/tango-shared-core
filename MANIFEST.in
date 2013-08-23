@@ -1,7 +1,7 @@
-include LICENSE README
-recursive-include tango_shared *.py *.html *.js
+include LICENSE README.md
+recursive-include tango_shared *.html
+recursive-include tango_shared *.css
+recursive-include tango_shared *.js
+recursive-include tango_shared *.txt
 
-recursive-include include docs/ *
-
-recursive-include tango_shared/static/ *
-recursive-include tango_shared/templates/ *
+recursive-include docs *.txt
