@@ -10,6 +10,8 @@ from django.utils.safestring import mark_safe
 from easy_thumbnails.fields import ThumbnailerImageField
 from easy_thumbnails.files import get_thumbnailer
 
+from tango_shared.utils.sanetize import sanetize_text
+
 now = datetime.datetime.now()
 
 comments_close_days    = getattr(settings, 'COMMENTS_CLOSE_AFTER', 30)
@@ -61,6 +63,11 @@ class BaseContentModel(models.Model):
         If you don't, a summary will be created. But you should.
         """
     )
+    summary_formatted = models.TextField(
+        blank=True,
+        editable=False,
+        help_text="""Stores HTML formatted, sanitized version of summary"""
+    )
 
     featured = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
@@ -90,6 +97,7 @@ class BaseContentModel(models.Model):
             # most models will have get_image. video falls back to thumb_url
             if self.get_image() or hasattr(self, 'thumb_url'):
                 self.has_image = True
+        self.summary_formatted = sanetize_text(self.summary)
         super(BaseContentModel, self).save(*args, **kwargs)
 
 
