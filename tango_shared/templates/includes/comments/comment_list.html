@@ -1,4 +1,4 @@
-{% load voting_tags markup typogrify_tags site_tags cache %}
+{% load voting_tags typogrify_tags site_tags cache %}
 
 {% if not comment_list %}
   <p>No comments have been posted. Perhaps you'd like to be the first?</p>
@@ -33,7 +33,9 @@
           {% endcache %}
         </header>
         
-        <div class="post clearfix">{{ comment.comment|markdown|typogrify }}</div>
+        <div class="post clearfix">
+          {{ comment.comment|typogrify }}
+        </div>
         {% if authenticated_request %}
           <footer>
             {% with comment.user as profile %}

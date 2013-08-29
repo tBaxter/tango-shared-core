@@ -1,5 +1,5 @@
 {# Takes output from get_fresh_content template tag to create mixed list of what's new #}
-{% load typogrify_tags markup %}
+{% load typogrify_tags %}
 
 <div id="top-content" class="columned phi">
   {% with top_content.0 as object %}
@@ -23,7 +23,7 @@
           {% if object.has_image %}
             <p>{{ object.summary }}</p>
           {% else %}
-            <p>{{ object.body|markdown|truncatewords:"90" }}
+            <p>{{ object.body_formatted|truncatewords:"90" }}
           {% endif %}
         </section>
       </article>

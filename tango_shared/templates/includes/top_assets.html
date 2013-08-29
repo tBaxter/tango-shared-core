@@ -4,7 +4,7 @@
   And you really should slice top_assets down in get_top_assets().
 {% endcomment %}
 
-{% load typogrify_tags markup social_tags video_tags %}
+{% load typogrify_tags social_tags video_tags %}
 
 {% with object.get_top_assets as top_assets %}
   {% if top_assets or object.pullquote or object.geocode %}
@@ -23,7 +23,7 @@
                     {% if asset.byline %}
                       <span class="author">{{ asset.byline }}</span>
                     {% endif %}
-                    {% if asset.caption %}{{ asset.caption|markdown }}{% endif %}
+                    {% if asset.caption %}{{ asset.caption }}{% endif %}
                   </figcaption>
                 {% endif %}
               </figure>
