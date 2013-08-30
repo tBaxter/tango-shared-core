@@ -4,6 +4,7 @@ from PIL import Image
 
 from django.conf import settings
 from django.contrib.sites.models import Site
+from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
 from django.utils.safestring import mark_safe
 
@@ -146,16 +147,16 @@ class ContentImage(models.Model):
         # Check if this is an already existing photo
         try:
             old_self = self.__class__.objects.get(id=self.id)
-        except:
+        except ObjectDoesNotExist:
             old_self = None
         #  Run on new and changed images:
         if self.id is None or self.thumb is None or (old_self.image != img):
             try:
                 height = img.height
                 width  = img.width
-            except Exception, inst:
+            except Exception as error:
                 # We aren't dealing with a reliable image, so....
-                print "Error saving... Unable to get image height or width: %s" % inst
+                print "Error getting image height or width: {}".format(error)
                 return
             # If image is vertical or square (treated as vertical)...
             if height >= width:
@@ -175,8 +176,8 @@ class ContentImage(models.Model):
                     'size': (80, 80),
                     'crop': ',-10'
                 }).url.replace("\\", "/")
-            except Exception, inst:
-                print "Error thumbnailing %s: %s" % (self.id, inst)
+            except Exception as error:
+                print "Error thumbnailing {}: {}".format(self.id, error)
         super(ContentImage, self).save(*args, **kwargs)
 
     def admin_thumb(self):
