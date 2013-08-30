@@ -29,10 +29,8 @@ def format_time(date_obj, time_obj=None, datebox=False, dt_type=None):
     {% format_time obj.end_date obj.end_time 'datebox' 'dt_end' %}
     """
     if not time_obj:
-        try:
-            time_obj = date_obj.time
-        except:
-            time_obj = None
+        time_obj = getattr(date_obj.time, None)
+
     return {
         'date_obj': date_obj,
         'time_obj': time_obj,
@@ -56,7 +54,7 @@ def short_timesince(date):
     """
     try:
         return timesince(date).split(", ")[0]
-    except IndexError():
+    except IndexError:
         timesince(date)
 
 
