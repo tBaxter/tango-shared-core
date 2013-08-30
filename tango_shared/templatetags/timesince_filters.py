@@ -10,7 +10,7 @@ def short_timesince(date):
 	Ex. 3 days, 20 hours becomes "3 days ago"
 	"""
 	try:
-		ago = timesince(date).split(",")[0]
-	except: # can't get valid datetime !?!
-		ago = "some time"
-	return ago
+		timesince_string = timesince(date).split(",")[0]
+	except IndexError: # can't get valid datetime !?!
+		timesince_string = "some time"
+	return timesince_string
