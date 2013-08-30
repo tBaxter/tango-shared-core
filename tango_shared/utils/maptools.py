@@ -17,31 +17,30 @@ def get_geocode(city, state, street_address="", zipcode=""):
     """
     try:
         key = settings.GMAP_KEY
-    except:
+    except AttributeError:
         return "You need to put GMAP_KEY in settings"
 
     # build valid location string
     location = ""
     if street_address:
-        safeaddr = street_address.replace(" ", "+")
-        location += '%s+' % safeaddr
-    safecity = city.replace(" ", "+")
-    location += '%s+%s' % (safecity, state)
+        location += '{}+'.format(street_address.replace(" ", "+"))
+    location += '{}+{}'.format(city.replace(" ", "+"), state)
     if zipcode:
-        location += "+%s" % zipcode
+        location += "+{}".format(zipcode)
 
     url = "http://maps.google.com/maps/geo?q=%s&output=xml&key=%s" % (location, key)
     file = urllib.urlopen(url).read()
     try:
         xml = xmltramp.parse(file)
-    except:
-        print "Failed to parse xml:" + file
+    except Exception as error:
+        print "Failed to parse xml file {}: {}".format(file, error)
         return None
 
     status = str(xml.Response.Status.code)
     if status == "200":
         geocode = str(xml.Response.Placemark.Point.coordinates).split(',')
-         # Flip geocode because geocoder returns long/lat. Maps wants lat/long.
+         # Flip geocode because geocoder returns long/lat while Maps wants lat/long.
+         # Yes, it's dumb.
         return (geocode[1], geocode[0])
     else:
         print status
