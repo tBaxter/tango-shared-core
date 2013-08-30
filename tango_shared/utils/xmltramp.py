@@ -106,7 +106,7 @@ class Element:
                 elif isinstance(x, Element):
                     out += x.__repr__(recursive+1, multiline, inprefixes.copy())
                 else:
-                    raise TypeError, "I wasn't expecting "+`x`+"."
+                    raise TypeError("I wasn't expecting {}.".format(x))
             if multiline and content:
                 out += '\n' + ('\t' * (recursive-1))
         else:
@@ -126,11 +126,12 @@ class Element:
         return self.__unicode__().encode('utf-8')
     
     def __getattr__(self, n):
-        if n[0] == '_': raise AttributeError, "Use foo['"+n+"'] to access the child element."
+        if n[0] == '_':
+            raise AttributeError("Use foo['{}'] to access the child element.".format(n))
         if self._dNS: n = (self._dNS, n)
         for x in self._dir:
             if isinstance(x, Element) and x._name == n: return x
-        raise AttributeError, 'No child element named %s' % repr(n)
+        raise AttributeError('No child element named {}'.format(repr(n)))
         
     def __hasattr__(self, n):
         for x in self._dir:
@@ -159,7 +160,7 @@ class Element:
             if self._dNS and not islst(n): n = (self._dNS, n)
             for x in self._dir:
                 if isinstance(x, Element) and x._name == n: return x
-            raise KeyError, n
+            raise KeyError(n)
     
     def __setitem__(self, n, v):
         if isinstance(n, type(0)): # d[1]
@@ -306,13 +307,13 @@ def unittest():
     d = Element('foo', attrs={'foo': 'bar'}, children=['hit with a', Element('bar'), Element('bar')])
     try:
         d._doesnotexist
-        raise "ExpectedError", "but found success. Damn."
+        raise Exception("Expected Error but found success. Damn.")
     except AttributeError: 
         pass
     assert d.bar._name == 'bar'
     try:
         d.doesnotexist
-        raise "ExpectedError", "but found success. Damn."
+        raise Exception("Expected Error but found success. Damn.")
     except AttributeError: 
         pass
     assert hasattr(d, 'bar') == True
