@@ -23,7 +23,7 @@
           {% if object.has_image %}
             <p>{{ object.summary }}</p>
           {% else %}
-            <p>{{ object.body_formatted|truncatewords:"90" }}
+            <p>{{ object.body_formatted|safe|truncatewords:"90" }}
           {% endif %}
         </section>
       </article>

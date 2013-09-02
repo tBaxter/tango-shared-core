@@ -243,7 +243,7 @@ def format_text(value):
         value = value.replace(x[0], '<span class="emoticon-{}"></span>'.format(x[1]))
 
     markedup = markdown.markdown(value).replace('</p>\n<p>', '</p><p>')
-    with_linebreaks = linebreaks(markedup)
+    with_linebreaks = markedup.replace('\n* ', '<br>* ')
     bleached = bleach.clean(with_linebreaks, tags=ALLOWED_TAGS, attributes=ALLOWED_ATTRIBUTES, strip=True)
     return mark_safe(bleached)
 

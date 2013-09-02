@@ -1,7 +1,9 @@
-import urllib
-import xmltramp
+from __future__ import print_function
 
+import urllib
 from django.conf import settings
+
+from ..utils import xmltramp
 
 
 def get_geocode(city, state, street_address="", zipcode=""):
@@ -43,5 +45,5 @@ def get_geocode(city, state, street_address="", zipcode=""):
          # Yes, it's dumb.
         return (geocode[1], geocode[0])
     else:
-        print status
+        print(status)
         return None
