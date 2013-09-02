@@ -29,7 +29,7 @@ def format_time(date_obj, time_obj=None, datebox=False, dt_type=None):
     {% format_time obj.end_date obj.end_time 'datebox' 'dt_end' %}
     """
     if not time_obj:
-        time_obj = getattr(date_obj.time, None)
+        time_obj = getattr(date_obj, 'time', None)
 
     return {
         'date_obj': date_obj,
