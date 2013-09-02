@@ -13,8 +13,8 @@ class TestSharedContent(TestCase):
         Ensures base template has required media files.
         """
         response = self.client.get(reverse('home'))
-        favicon_url = '<link rel="shortcut icon" href="%simg/favicon.png">' % settings.STATIC_URL
-        touch_icon = '<link rel="apple-touch-icon" href="%simg/touch-icon.png">' % settings.STATIC_URL
+        favicon_url = '<link rel="shortcut icon" href="{}img/favicon.png">'.format(settings.STATIC_URL)
+        touch_icon = '<link rel="apple-touch-icon" href="{}img/touch-icon.png">'.format(settings.STATIC_URL)
         self.assertEqual(response.status_code, 200)
         self.assertTrue(favicon_url in response.content)
         self.assertTrue(touch_icon in response.content)

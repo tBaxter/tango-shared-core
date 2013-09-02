@@ -156,7 +156,7 @@ class ContentImage(models.Model):
                 width  = img.width
             except Exception as error:
                 # We aren't dealing with a reliable image, so....
-                print "Error getting image height or width: {}".format(error)
+                #print("Error getting image height or width: {}".format(error))
                 return
             # If image is vertical or square (treated as vertical)...
             if height >= width:
@@ -177,7 +177,7 @@ class ContentImage(models.Model):
                     'crop': ',-10'
                 }).url.replace("\\", "/")
             except Exception as error:
-                print "Error thumbnailing {}: {}".format(self.id, error)
+                print("Error thumbnailing {}: {}".format(self.id, error))
         super(ContentImage, self).save(*args, **kwargs)
 
     def admin_thumb(self):
@@ -185,6 +185,6 @@ class ContentImage(models.Model):
         Allows for admin thumbnails
         """
         if self.thumb:
-            return '<img src="%s">' % self.thumb
+            return '<img src="{}">'.format(self.thumb)
         return None
     admin_thumb.allow_tags = True

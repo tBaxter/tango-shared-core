@@ -1,5 +1,9 @@
 import re
-import urlparse
+
+try:
+    import urllib.parse as urlparse
+except ImportError:
+    import urlparse
 
 import bleach
 import markdown
@@ -173,7 +177,7 @@ def convert_links(text, trim_url_limit=None, nofollow=False, autoescape=False):
             if simple_url_re.match(middle):
                 url = smart_urlquote(middle)
             elif simple_url_2_re.match(middle):
-                url = smart_urlquote('http://%s' % middle)
+                url = smart_urlquote('http://{}'.format(middle))
             elif not ':' in middle and simple_email_re.match(middle):
                 local, domain = middle.rsplit('@', 1)
                 try:
@@ -188,7 +192,7 @@ def convert_links(text, trim_url_limit=None, nofollow=False, autoescape=False):
 
                 # Photos
                 if u.endswith('.jpg') or u.endswith('.gif') or u.endswith('.png'):
-                    middle = '<img src="%s">' % url
+                    middle = '<img src="{}">'.format(url)
 
                 # Youtube
                 #'https://www.youtube.com/watch?v=gkqXgaUuxZg'
@@ -197,7 +201,7 @@ def convert_links(text, trim_url_limit=None, nofollow=False, autoescape=False):
                     query  = urlparse.parse_qs(parsed.query)
                     token  = query.get('v')
                     if token and len(token) > 0:
-                        middle = '<iframe src="http://www.youtube.com/embed/%s" height="320" width="100%%"></iframe>' % token[0]
+                        middle = '<iframe src="http://www.youtube.com/embed/{}" height="320" width="100%%"></iframe>'.format(token[0])
                     else:
                         middle = url
                 elif 'youtu.be/' in url:
@@ -207,7 +211,7 @@ def convert_links(text, trim_url_limit=None, nofollow=False, autoescape=False):
                     except IndexError:
                         middle = url
 
-                words[i] = mark_safe('%s%s%s' % (lead, middle, trail))
+                words[i] = mark_safe('{}{}{}'.format(lead, middle, trail))
             else:
                 if safe_input:
                     words[i] = mark_safe(word)
@@ -236,7 +240,7 @@ def format_text(value):
     value = urlizetrunc(value, 30)
 
     for x in EMOTICON_REPLACEMENTS:
-        value = value.replace(x[0], '<span class="emoticon-%s"></span>' % x[1])
+        value = value.replace(x[0], '<span class="emoticon-{}"></span>'.format(x[1]))
 
     markedup = markdown.markdown(value).replace('</p>\n<p>', '</p><p>')
     with_linebreaks = linebreaks(markedup)

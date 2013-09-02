@@ -28,12 +28,12 @@ def get_geocode(city, state, street_address="", zipcode=""):
     if zipcode:
         location += "+{}".format(zipcode)
 
-    url = "http://maps.google.com/maps/geo?q=%s&output=xml&key=%s" % (location, key)
+    url = "http://maps.google.com/maps/geo?q={}&output=xml&key={}".format(location, key)
     file = urllib.urlopen(url).read()
     try:
         xml = xmltramp.parse(file)
     except Exception as error:
-        print "Failed to parse xml file {}: {}".format(file, error)
+        print("Failed to parse xml file {}: {}".format(file, error))
         return None
 
     status = str(xml.Response.Status.code)

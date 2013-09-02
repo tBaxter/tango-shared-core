@@ -5,19 +5,14 @@ __author__ = "Aaron Swartz"
 __credits__ = "Many thanks to pjz, bitsko, and DanC."
 __copyright__ = "(C) 2003-2006 Aaron Swartz. GNU GPL 2."
 
-if not hasattr(__builtins__, 'True'):
-    True, False = 1, 0
-
 
 def isstr(f):
     return isinstance(f, type('')) or isinstance(f, type(u''))
-
 
 def islst(f):
     return isinstance(f, type(())) or isinstance(f, type([]))
 
 empty = {'http://www.w3.org/1999/xhtml': ['img', 'br', 'hr', 'meta', 'link', 'base', 'param', 'input', 'col', 'area']}
-
 
 def quote(x, elt=True):
     if elt and '<' in x and len(x) > 24 and x.find(']]>') == -1:
