@@ -113,9 +113,9 @@ class ContentImage(models.Model):
         help_text = "Image size should be a minimum of 720px and no more than 2000px (width or height)",
         blank=True
     )
-    caption = models.CharField(max_length=255, blank=True)
-    byline = models.CharField(max_length=200, blank=True)
-    credit = models.CharField("Credit/source", max_length=200, blank=True)
+    caption = models.CharField(max_length=255, blank=True, null=True)
+    byline = models.CharField(max_length=200, blank=True, null=True)
+    credit = models.CharField("Credit/source", max_length=200, blank=True, null=True)
     order = models.IntegerField(
         blank=True,
         null=True,
