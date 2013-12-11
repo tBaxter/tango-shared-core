@@ -125,6 +125,7 @@ def get_fresh_content(top=4, additional=10, featured=False):
     return {
         'top_content': top_content,
         'additional_content': additional_content,
+        'MEDIA_URL': settings.MEDIA_URL,
     }
 
 

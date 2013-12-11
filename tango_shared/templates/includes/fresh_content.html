@@ -1,39 +1,43 @@
-{# Takes output from get_fresh_content template tag to create mixed list of what's new #}
+{# Takes output from the get_fresh_content template tag to create mixed list of what's new #}
 {% load typogrify_tags %}
 
-<div id="top-content" class="columned phi">
+<div id="top-content">
   {% with top_content.0 as object %}
-    {% with object.get_image as img %}
-      <article id="featured_item" {% if img.vertical %}class="vertical"{% endif %}>
+    {% with object.get_image as img_object %}
+      <article id="lead-item">
         <a href="{{ object.get_absolute_url }}">
           {# the firstof below is because video has thumb_url, not a real image object #}
-          <img src="{% if img.vertical %}{{ img.t_360u }}{% else %}{% firstof img.t_640 img %}{% endif %}" {% if img.vertical %} class="vertical"{% endif %}>
+          <figure  {% if img_object.is_vertical %}class="vertical"{% endif %}>
+            <img src="{{ MEDIA_URL }}{% if img_object.is_vertical %}{{ img_object.image.t_360u }}{% else %}{{ img_object.image.t_640 }}{% endif %}">
+          </figure>
           {% comment %}
             To do: ensure this works:
             {% if top_item.show_label or top_item.opinion %}
                 <span class="kicker meta">{% firstof top_item.show_label.category top_item.author top_item.other_author|title %}</span>
             {% endif %}
           {% endcomment %}
-          <h1>{{ object.title }}</h1>
+          <h1>{{ object.title|typogrify }}</h1>
           {% if object.subhead %}
-            <h2 class="subhead">{{ object.subhead }}</h2>
+            <h2 class="subhead">{{ object.subhead|typogrify }}</h2>
           {% endif %}
         </a>
         <section class="article-body">
           {% if object.has_image %}
             <p>{{ object.summary }}</p>
           {% else %}
-            <p>{{ object.body_formatted|safe|truncatewords:"90" }}
+            {{ object.body_formatted|safe|truncatewords:"50" }}
           {% endif %}
         </section>
       </article>
     {% endwith %}
   {% endwith %}
-  <div id="more_featured">
+  <div id="more-featured">
     {% for object in top_content|slice:"1:" %}
       <article>
         <a href="{{ object.get_absolute_url }}">
-          <img src="{% firstof object.get_image.image.t_320  object.get_image %}">
+          <figure>
+            <img src="{% firstof object.get_image.image.t_320  object.get_image %}">
+          </figure>
           <h1 class="has_photos">{{ object.title }}</h1>
           {% comment %}
             {% if obj.show_label %}

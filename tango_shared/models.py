@@ -160,7 +160,7 @@ class ContentImage(models.Model):
                 return
             # If image is vertical or square (treated as vertical)...
             if height >= width:
-                self.vertical = True
+                self.is_vertical = True
             if width > 900 or height > 1200:
                 """
                 The image is larger than we want.
@@ -179,6 +179,10 @@ class ContentImage(models.Model):
             except Exception as error:
                 print("Error thumbnailing {}: {}".format(self.id, error))
         super(ContentImage, self).save(*args, **kwargs)
+
+    def has_caption_info(self):
+        if self.caption or self.byline or self.credit:
+            return True
 
     def admin_thumb(self):
         """
