@@ -37,31 +37,24 @@
 </head>
 
 <body id="{% block bodyid %}default{% endblock %}" class="{% block bodyclass %}section_front{% endblock %} {% block extra_body_class %}{% endblock %}">
-  <div id="wrapper">
-    <header role="banner">
-      <div>
-        <div class="site-name">
-          {% block menu_button %}{% endblock %}
-          {% block site_header %}
-            <h1>
-              <a href="/" title="Home">
-                {% block logo %}{{ site.name }}{% endblock %}
-              </a>
-            </h1>
-            {% block nav_tagline %}{% endblock %}
-          {% endblock %}
-        </div>
-        <nav role="navigation" id="nav-menu">
-          {% block site_nav %}
-            {% include 'includes/site_nav.html' %}
-          {% endblock %}
-        </nav>
+  <header role="banner">
+    {% block banner %}
+      <div class="site-name">
+        {% block site_name %}
+          <h1>
+            <a href="/" title="Home">
+              {% block logo %}{{ site.name }}{% endblock %}
+            </a>
+          </h1>
+          {% block nav_tagline %}{% endblock %}
+        {% endblock %}
       </div>
-    </header>
-
+    {% endblock %}
+    {% block banner_nav %}{% endblock %}
+  </header>
+  <div id="wrapper">
     {% block content_top %}{% endblock %}
-
-    <div id="content-wrapper" class="constrain">
+    <div id="content-wrapper">
       {% block messages %}
         {% if messages %}
           <ul class="messages">
@@ -86,9 +79,13 @@
     </div>
 
     <footer id="footer" role="contentinfo">
-      {% block footer_nav %}{% endblock %}
+      {% block footer_nav %}
+        <nav role="navigation">      
+          {% include 'includes/site_nav.html' %}
+        </nav>
+      {% endblock %}
       {% block footer %}
-        <div class="constrain">
+        <div>
           <p class="right">Powered by <a href="http://tbaxter.github.io/Tango/">Tango</a>
           <p class="copyright">&copy; {{ now.year }} {{ site.name }}</p>
         </div>

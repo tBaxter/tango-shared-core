@@ -1,4 +1,4 @@
-<time datetime="{{ date_obj|date:"Y-m-d" }}{% if time_obj %}T{{ time_obj|time:"H:i" }}Z{% endif %}" class="{{ dt_type }} {{ datebox }}">
+<time datetime="{{ date_obj|date:"Y-m-d" }}{% if time_obj %}T{{ time_obj|time:"H:i" }}Z{% endif %}" class="{{ classes }}">
   {% if time_obj and not datebox %}
     <span class="t">{{ time_obj|date:"f a" }}</span>
   {% endif %}

@@ -15,13 +15,15 @@ register = template.Library()
 
 
 @register.inclusion_tag('includes/formatted_time.html')
-def format_time(date_obj, time_obj=None, datebox=False, dt_type=None):
+def format_time(date_obj, time_obj=None, datebox=False, dt_type=None, classes=None):
     """
     Returns formatted HTML5 elements based on given datetime object.
     By default returns a time element, but will return a .datebox if requested.
 
     dt_type allows passing dt_start or dt_end for hcal formatting.
     link allows passing a url to the datebox.
+
+    classes allows sending arbitrary classnames. Useful for properly microformatting elements.
 
     Usage:
     {% format_time obj.pub_date %}
@@ -31,12 +33,16 @@ def format_time(date_obj, time_obj=None, datebox=False, dt_type=None):
     if not time_obj:
         time_obj = getattr(date_obj, 'time', None)
 
+    if dt_type:
+        classes = '{0} {1}'.format(classes, dt_type)
+    if datebox:
+        classes = '{0} {1}'.format(classes, datebox)
     return {
         'date_obj': date_obj,
         'time_obj': time_obj,
         'datebox': datebox,
         'current_year': datetime.date.today().year,
-        'dt_type': dt_type,
+        'classes': classes
     }
 
 

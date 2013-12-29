@@ -4,3 +4,4 @@ recursive-include tango_shared *.css
 recursive-include tango_shared *.js
 
 recursive-include docs *.txt
+recursive-include docs *.md

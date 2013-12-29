@@ -74,7 +74,6 @@ class BaseContentModel(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     sites = models.ManyToManyField(Site, default=[settings.SITE_ID])
     enable_comments = models.BooleanField(default=True)
-    created = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
     published = models.BooleanField(default=True)
     has_image = models.BooleanField(max_length=200, default=False, editable=False)
