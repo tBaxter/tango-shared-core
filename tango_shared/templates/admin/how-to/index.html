@@ -32,7 +32,7 @@
       $(document).ready(function() {
         $('#content-main ol').hide();
         $('#content-main h4').click(function(){
-          $(this).next().toggle();
+          $(this).parent().find('ol').toggle();
         });
       });
     })(jQuery);
