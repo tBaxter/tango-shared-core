@@ -12,3 +12,5 @@ tango_shared_core.egg-info/dependency_links.txt
 tango_shared_core.egg-info/not-zip-safe
 
 tango_shared_core.egg-info/top_level.txt
+
+*.gz
