@@ -38,7 +38,7 @@
       <article>
         <a href="{{ object.get_absolute_url }}">
           <figure>
-            <img src="{{ MEDIA_URL }}{% firstof object.get_image.image..t_360 %}">
+            <img src="{{ MEDIA_URL }}{{ object.get_image.image.t_360 }}">
           </figure>
           <h1 class="has_photos">{{ object.title }}</h1>
           {% comment %}
