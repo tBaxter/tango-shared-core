@@ -51,12 +51,12 @@ COMMENTS_MOD_AFTER = 15
 TANGO_APPS = (
     'tango_capo',
     'tango_shared',
+    'user_profiles',
     'articles',
     'autotagger',
     'contact_manager',
     'happenings',
     'photos',
-    'user_profiles',
     'video',
     'typogrify',
     'voting',
