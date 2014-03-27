@@ -4,7 +4,7 @@ from setuptools import find_packages
 
 setup(
     name='tango-shared-core',
-    version='0.6.3',
+    version='0.6.4',
     author=u'Tim Baxter',
     author_email='mail.baxter@gmail.com',
     url='https://github.com/tBaxter/tango-shared-core',
@@ -15,6 +15,6 @@ setup(
     zip_safe=False,
     include_package_data=True,
     dependency_links = [
-        'http://github.com/tBaxter/django-voting/tarball/master#egg=tango-voting-0.1',
+        'http://github.com/tBaxter/django-voting/tarball/master#egg=tango-voting',
     ]
 )
