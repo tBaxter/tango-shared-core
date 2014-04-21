@@ -6,14 +6,16 @@ from django.conf import settings
 from django.contrib.sites.models import Site
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
+from django.utils.functional import cached_property
 from django.utils.safestring import mark_safe
 
 from easy_thumbnails.fields import ThumbnailerImageField
 from easy_thumbnails.files import get_thumbnailer
+from voting.models import Vote
 
-from tango_shared.utils.sanetize import sanetize_text
+from tango_shared.utils.sanetize import clean_text, format_text, sanetize_text
 
-now = datetime.datetime.now()
+now = datetime.datetime.utcnow()
 
 comments_close_days    = getattr(settings, 'COMMENTS_CLOSE_AFTER', 30)
 comments_moderate_days = getattr(settings, 'COMMENTS_MOD_AFTER', 30)
@@ -101,11 +103,38 @@ class BaseContentModel(models.Model):
         super(BaseContentModel, self).save(*args, **kwargs)
 
 
+
+class BaseUserContentModel(models.Model):
+    """
+    Generic abstract model for user-submitted content to 
+    have consistent sanitization and formatting.
+    """
+    author = models.ForeignKey(settings.AUTH_USER_MODEL)
+    text = models.TextField()
+    text_formatted = models.TextField(blank=True)
+    post_date = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        abstract = True
+
+    def save(self, *args, **kwargs):
+        """
+        Clean text and save formatted version.
+        """
+        self.text = clean_text(self.text)
+        self.text_formatted = format_text(self.text)
+        super(BaseUserContentModel, self).save(*args, **kwargs)
+
+    @cached_property
+    def votes(self):
+        """ Return vote score """
+        return Vote.objects.get_score(self)['score']
+
+
 class ContentImage(models.Model):
     """
     Generic image object, to be attached to other content.
     It is abstract, and must be subclassed.
-    To do -- figure out per-model img_path
     """
     image = ThumbnailerImageField(
         upload_to = set_img_path,
