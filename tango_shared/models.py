@@ -109,7 +109,7 @@ class BaseUserContentModel(models.Model):
     Generic abstract model for user-submitted content to 
     have consistent sanitization and formatting.
     """
-    author = models.ForeignKey(settings.AUTH_USER_MODEL)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
     text = models.TextField()
     text_formatted = models.TextField(blank=True)
     post_date = models.DateTimeField(auto_now_add=True)
