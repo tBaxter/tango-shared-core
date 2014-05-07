@@ -1,4 +1,4 @@
-{% load voting_tags typogrify_tags site_tags cache %}
+{% load voting_tags typogrify_tags tango_site_tags cache %}
 
 {% if not comment_list %}
   <p>No comments have been posted. Perhaps you'd like to be the first?</p>
@@ -8,7 +8,7 @@
     {% for comment in comment_list %}
       {% dict_entry_for_item comment from score_dict as score %}
       <article class="{{ score|set_flag }}" id="c{{ comment.id }}">
-        <header {% if comment.submit_date > last_seen %} class="newposts"{% endif %}>
+        <header {% if comment.post_date > last_seen %} class="newposts"{% endif %}>
           {% cache 46800 'comment_fks' comment.id 3 %}
             {% with comment.user as profile %}
               <a href="{% url 'view_profile' profile.username %}" rel="author">

@@ -103,6 +103,26 @@ class BaseContentModel(models.Model):
         super(BaseContentModel, self).save(*args, **kwargs)
 
 
+class BaseSidebarContentModel(models.Model):
+    """
+    For sidebar-type additional info for content and sub-pages for content.
+    Defines basic fields. Used for articles and happenings.
+    Should always be attached to larger content.
+    """
+    title = models.CharField(max_length=300)
+    slug  = models.SlugField(help_text="Only needed if this is not a sidebar")
+    text  = models.TextField()
+    text_formatted = models.TextField(blank=True, null=True, editable=False)
+    is_sidebar = models.BooleanField(default=False)
+    image = models.ImageField(upload_to=set_img_path, blank=True, null=True)
+
+    def __unicode__(self):
+        return unicode(self.title)
+
+    def save(self, *args, **kwargs):
+        self.text_formatted = sanetize_text(self.text)
+        super(BaseSidebarContentModel, self).save(*args, **kwargs)
+
 
 class BaseUserContentModel(models.Model):
     """
