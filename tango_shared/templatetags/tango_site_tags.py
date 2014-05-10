@@ -7,9 +7,6 @@ from django.utils.encoding import force_text
 from django.utils.timesince import timesince
 from django.utils.safestring import mark_safe
 
-from articles.models import Article
-from photos.models import Gallery
-from video.models import Video
 
 register = template.Library()
 
@@ -82,6 +79,7 @@ def fix_indents(value):
 @register.inclusion_tag('includes/fresh_content.html')
 def get_fresh_content(top=4, additional=10, featured=False):
     """
+    Requires articles, photos and video packages to be installed.
     Returns published *Featured* content (articles, galleries, video, etc)
     and an additional batch of fresh regular (featured or not) content.
     The number of objects returned is defined when the tag is called.
@@ -105,6 +103,10 @@ def get_fresh_content(top=4, additional=10, featured=False):
         'more_galleries': A stack of galleries, excluding what's in featured, sliced to the number passed for <num_regular>,
         'additional':     A mixed list of articles and galleries, excluding what's in featured, sliced to the number passed for <num_regular>,
     """
+    from articles.models import Article
+    from photos.models import Gallery
+    from video.models import Video
+    
     articles = Article.published.only('title', 'summary', 'slug', 'created')
     galleries = Gallery.published.only('title', 'summary', 'slug', 'created')
     videos = Video.published.only('title', 'summary', 'slug', 'created')
