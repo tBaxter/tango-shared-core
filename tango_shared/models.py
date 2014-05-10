@@ -119,6 +119,9 @@ class BaseSidebarContentModel(models.Model):
     is_sidebar = models.BooleanField(default=False)
     image = models.ImageField(upload_to=set_img_path, blank=True, null=True)
 
+    class Meta:
+        abstract = True
+
     def __unicode__(self):
         return unicode(self.title)
 
