@@ -106,8 +106,11 @@ class BaseContentModel(models.Model):
 class BaseSidebarContentModel(models.Model):
     """
     For sidebar-type additional info for content and sub-pages for content.
+
     Defines basic fields. Used for articles and happenings.
+    
     Should always be attached to larger content.
+
     """
     title = models.CharField(max_length=300)
     slug  = models.SlugField(help_text="Only needed if this is not a sidebar")
@@ -128,6 +131,7 @@ class BaseUserContentModel(models.Model):
     """
     Generic abstract model for user-submitted content to 
     have consistent sanitization and formatting.
+    
     """
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
     text = models.TextField()

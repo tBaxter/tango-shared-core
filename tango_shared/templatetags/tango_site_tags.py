@@ -22,10 +22,12 @@ def format_time(date_obj, time_obj=None, datebox=False, dt_type=None, classes=No
 
     classes allows sending arbitrary classnames. Useful for properly microformatting elements.
 
-    Usage:
-    {% format_time obj.pub_date %}
-    {% format_time obj.start_date 'datebox' 'dtstart' %}
-    {% format_time obj.end_date obj.end_time 'datebox' 'dt_end' %}
+    Usage::
+
+        {% format_time obj.pub_date %}
+        {% format_time obj.start_date 'datebox' 'dtstart' %}
+        {% format_time obj.end_date obj.end_time 'datebox' 'dt_end' %}
+    
     """
     if not time_obj:
         time_obj = getattr(date_obj, 'time', None)
@@ -80,18 +82,29 @@ def fix_indents(value):
 def get_fresh_content(top=4, additional=10, featured=False):
     """
     Requires articles, photos and video packages to be installed.
+    
     Returns published *Featured* content (articles, galleries, video, etc)
     and an additional batch of fresh regular (featured or not) content.
+    
     The number of objects returned is defined when the tag is called.
+    
     The top item type is defined in the sites admin for sites that
     have the supersites app enabled.
+    
     If "featured" is True, will limit to only featured content.
-    Usage:
+    
+    Usage::
+
         {% get_fresh_content 5 10 %}
-        Would return five top objects and 10 additional
+        
+    Would return five top objects and 10 additional
+    
         {% get_fresh_content 4 8 featured %}
-        Would return four top objects and 8 additional, limited to featured content.
-    What you get:
+    
+    Would return four top objects and 8 additional, limited to featured content.
+    
+    What you get::
+
         'top_item':       the top featured item
         'top_item_type':  the content type for the top item (article, gallery, video)
         'featured':       Additional featured items. If you asked for 5 featureed items, there will be 4
@@ -102,11 +115,12 @@ def get_fresh_content(top=4, additional=10, featured=False):
         'more_articles':  A stack of articles, excluding what's in featured, sliced to the number passed for <num_regular>,
         'more_galleries': A stack of galleries, excluding what's in featured, sliced to the number passed for <num_regular>,
         'additional':     A mixed list of articles and galleries, excluding what's in featured, sliced to the number passed for <num_regular>,
+    
     """
     from articles.models import Article
     from photos.models import Gallery
     from video.models import Video
-    
+
     articles = Article.published.only('title', 'summary', 'slug', 'created')
     galleries = Gallery.published.only('title', 'summary', 'slug', 'created')
     videos = Video.published.only('title', 'summary', 'slug', 'created')
