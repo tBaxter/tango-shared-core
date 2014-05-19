@@ -27,7 +27,7 @@
 
             <time datetime="{{ comment.submit_date|date:"Y-m-d\TH:i:00" }}" title="{{ comment.submit_date|date:"N j, Y g:i a" }}" >
               <!--googleoff: all-->
-                {{ comment.submit_date|short_timesince }} ago
+                {{ comment.post_date|short_timesince }} ago
               <!--googleon: all-->
             </time>
           {% endcache %}
