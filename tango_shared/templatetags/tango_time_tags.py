@@ -53,7 +53,8 @@ def short_timesince(date):
 
     """
     try:
-        return timesince(date).split(", ")[0]
+        t = timesince(date).split(", ")[0]
     except IndexError:
-        timesince(date)
+        t = timesince(date)
+    return t
 
