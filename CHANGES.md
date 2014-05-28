@@ -1,5 +1,8 @@
 # Tango Shared Core Change Log
 
+### 0.7.4
+Removed old comment templates. They don't belong here.
+
 ### 0.7.3
 Fixed attribute in comment list
 
