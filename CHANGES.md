@@ -1,5 +1,8 @@
 # Tango Shared Core Change Log
 
+### 0.7.6
+Small fix for emoticon replacements
+
 ### 0.7.5
 Attempted to resolve some intermittent unicode errors in sanetization.
 
