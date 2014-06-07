@@ -1,5 +1,8 @@
 # Tango Shared Core Change Log
 
+### 0.7.5
+Attempted to resolve some intermittent unicode errors in sanetization.
+
 ### 0.7.4
 Removed old comment templates. They don't belong here.
 

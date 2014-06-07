@@ -8,7 +8,7 @@ except ImportError:
 import bleach
 import markdown
 
-from django.template.defaultfilters import urlizetrunc, linebreaks
+from django.template.defaultfilters import urlizetrunc
 from django.utils.encoding import force_text
 from django.utils.safestring import SafeData, mark_safe
 from django.utils.html import TRAILING_PUNCTUATION, WRAPPING_PUNCTUATION, \
@@ -209,7 +209,7 @@ def convert_links(text, trim_url_limit=None, nofollow=False, autoescape=False):
                         token = url.rsplit('/', 1)[1]
                         middle = '<iframe src="http://www.youtube.com/embed/' + token + '" height="320" width="100%%"></iframe>'
                     except IndexError:
-                        middle = url
+                        middle = unicode(url)
 
                 words[i] = mark_safe('{}{}{}'.format(lead, middle, trail))
             else:
