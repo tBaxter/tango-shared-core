@@ -1,5 +1,8 @@
 # Tango Shared Core Change Log
 
+### 0.7.7
+.format() doesn't always play nice with 2.7. Removed some instances for reliability.
+
 ### 0.7.6
 Small fix for emoticon replacements
 

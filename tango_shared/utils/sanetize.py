@@ -178,7 +178,7 @@ def convert_links(text, trim_url_limit=None, nofollow=False, autoescape=False):
             if simple_url_re.match(middle):
                 url = smart_urlquote(middle)
             elif simple_url_2_re.match(middle):
-                url = smart_urlquote('http://{}'.format(middle))
+                url = smart_urlquote('http://%s' % middle)
             elif not ':' in middle and simple_email_re.match(middle):
                 local, domain = middle.rsplit('@', 1)
                 try:
@@ -193,7 +193,7 @@ def convert_links(text, trim_url_limit=None, nofollow=False, autoescape=False):
 
                 # Photos
                 if u.endswith('.jpg') or u.endswith('.gif') or u.endswith('.png'):
-                    middle = '<img src="{}">'.format(url)
+                    middle = '<img src="%s">' % url
 
                 # Youtube
                 #'https://www.youtube.com/watch?v=gkqXgaUuxZg'
@@ -202,17 +202,17 @@ def convert_links(text, trim_url_limit=None, nofollow=False, autoescape=False):
                     query  = urlparse.parse_qs(parsed.query)
                     token  = query.get('v')
                     if token and len(token) > 0:
-                        middle = '<iframe src="http://www.youtube.com/embed/{}" height="320" width="100%%"></iframe>'.format(token[0])
+                        middle = '<iframe src="http://www.youtube.com/embed/%s" height="320" width="100%%"></iframe>' % token[0]
                     else:
                         middle = url
                 elif 'youtu.be/' in url:
                     try:
                         token = url.rsplit('/', 1)[1]
-                        middle = '<iframe src="http://www.youtube.com/embed/' + token + '" height="320" width="100%%"></iframe>'
+                        middle = '<iframe src="http://www.youtube.com/embed/%s" height="320" width="100%%"></iframe>' % token
                     except IndexError:
                         middle = unicode(url)
 
-                words[i] = mark_safe('{}{}{}'.format(lead, middle, trail))
+                words[i] = mark_safe('%s%s%s' % (lead, middle, trail))
             else:
                 if safe_input:
                     words[i] = mark_safe(word)
