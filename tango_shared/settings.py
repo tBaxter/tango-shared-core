@@ -5,11 +5,11 @@ import django.conf.global_settings as DEFAULT_SETTINGS
 # Thumbnail aliases determines default image sizes for easy-thumbnails
 THUMBNAIL_ALIASES = {
     '': {
-        'thumb':     {'size': (50, 50),   'autocrop': True, 'crop': 'smart', 'upscale': True},
-        'one_col':   {'size': (60, 60),   'autocrop': True, 'crop': 'smart', 'upscale': True},
-        't_80':      {'size': (80, 80),   'autocrop': True, 'crop': 'smart', 'upscale': True},
-        'two_col':   {'size': (140, 140), 'autocrop': True,},
-        'two_col_c': {'size': (140, 140), 'autocrop': True, 'crop': 'smart', 'upscale': True},
+        'thumb':        {'size': (50, 50),   'autocrop': True, 'crop': 'smart', 'upscale': True},
+        'one_col':      {'size': (60, 60),   'autocrop': True, 'crop': 'smart', 'upscale': True},
+        't_80':         {'size': (80, 80),   'autocrop': True, 'crop': 'smart', 'upscale': True},
+        'two_col':      {'size': (140, 140), 'autocrop': True,},
+        'two_col_crop': {'size': (140, 140), 'autocrop': True, 'crop': 'smart', 'upscale': True},
         
         't_180':  {'size': (180, 180), 'autocrop': True, 'crop': 'smart', 'upscale': True},
         't_180t': {'size': (180, 240), 'autocrop': True, 'crop': '0,-10', 'upscale': True},
@@ -17,7 +17,11 @@ THUMBNAIL_ALIASES = {
         't_360':  {'size': (360, 360), 'autocrop': True, 'crop': 'smart', 'upscale': True},
         't_360u': {'size': (360, 540), 'autocrop': True},
         't_420':  {'size': (420, 420), 'autocrop': True, 'crop': 'scale'},
+        't_420u': {'size': (420, 420), 'autocrop': True},
+
         't_540':  {'size': (540, 540), 'autocrop': True, 'crop': 'scale'},
+        't_540u': {'size': (540, 540), 'autocrop': True},
+
         't_640':  {'size': (640, 640), 'autocrop': True, 'crop': 'scale'},
         't_720':  {'size': (720, 720), 'autocrop': True, 'crop': 'scale'},
         't_960':  {'size': (960, 960), 'autocrop': True, 'crop': 'scale'},

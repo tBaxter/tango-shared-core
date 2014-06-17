@@ -1,5 +1,8 @@
 # Tango Shared Core Change Log
 
+### 0.8.1
+Restored some photo sizes that went missing
+
 ### 0.8.0
 New column-based sizes for images
 
