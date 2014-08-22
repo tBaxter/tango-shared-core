@@ -11,7 +11,7 @@
     <aside id="top_assets">
       {% social_links object user %}
       {% if top_assets %}
-        <div class="slideshow">
+        <div {% if top_assets|length > 1 %}class="slideshow"{% endif %}>
           {% for asset in top_assets %}
             {% if asset.image %}
               <figure class="{% if asset.is_vertical %}vertical{% endif %} {% if asset.caption %}has-caption{% endif %}">

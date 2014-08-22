@@ -42,8 +42,10 @@ PROJECT_NAME = 'tango'
 # If true, content will be limited to the current site.
 RESTRICT_CONTENT_TO_SITE = True
 
-# If set to true, additional fields news organizations
-# need will be added, including options to mark content as
+# If your site is a news source, set to True.
+# This will attach the name of your organization to articles
+# as well as add extra fields news organizations need,
+# including options to mark content as
 # opinion/editorial, dateline, and noting another source as
 # the origin of the content.
 NEWS_SOURCE = True
