@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.core.urlresolvers import reverse
+from django.template import Template, Context
 from django.test import TestCase
 
 
@@ -35,3 +36,31 @@ class TestSharedContent(TestCase):
         self.assertTrue('last_seen_fuzzy' in response.context)
         self.assertTrue('theme' in response.context)
         self.assertTrue('authenticated_request' in response.context)
+
+
+class TemplateTagsTests(TestCase):
+    fixtures = ['users.json']
+
+    def setUp(self):
+        self.test_list = ['apples', 'oranges']
+
+    def test_humanized_join_with_one_items(self):
+        t = Template('{% load formatting %}{{ mylist|humanized_join }}')
+        c = Context({"mylist": 'foo'})
+        output = t.render(c)
+        self.assertEqual(output, 'foo')
+
+    def test_humanized_join_with_two_items(self):
+        t = Template('{% load formatting %}{{ mylist|humanized_join }}')
+        c = Context({"mylist": self.test_list})
+        output = t.render(c)
+        self.assertEqual(output, 'apples and oranges')
+
+    def test_humanized_join_with_more_items(self):
+        t = Template('{% load formatting %}{{ mylist|humanized_join }}')
+        self.test_list.append('pears')
+        c = Context({"mylist": self.test_list})
+        output = t.render(c)
+        print output
+        self.assertEqual(output, 'apples, oranges, and pears')
+

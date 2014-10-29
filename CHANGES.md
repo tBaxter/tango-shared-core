@@ -1,5 +1,17 @@
 # Tango Shared Core Change Log
 
+### 0.12.0 -- 10.1.14
+* Added some template tag tests
+* renamed humanize_join to humanized_simple_join
+* Included more robust humanized_simple_join that uses get_absolute_url to create a link to the object.
+
+### 0.11.0 -- 10.1.14
+* Moved modernizer to bottom of file. Note that you may want to use a custom modernizr build and put an html5 shim high in the document. {% block htmlshiv %} has been added for that purpose in the base_all template. See http://stackoverflow.com/a/16085479 for details.
+* Added humanize_join template filter in formatting tags, to provide nice "apples, oranges, and pears" output.
+
+### 0.10.0 -- 8.27.14
+Added three col thumbnail defaults
+
 ### 0.9.0
 Spun admin functionality out to tango-admin
 

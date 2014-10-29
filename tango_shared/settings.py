@@ -8,9 +8,14 @@ THUMBNAIL_ALIASES = {
         'thumb':        {'size': (50, 50),   'autocrop': True, 'crop': 'smart', 'upscale': True},
         'one_col':      {'size': (60, 60),   'autocrop': True, 'crop': 'smart', 'upscale': True},
         't_80':         {'size': (80, 80),   'autocrop': True, 'crop': 'smart', 'upscale': True},
+
         'two_col':      {'size': (140, 140), 'autocrop': True,},
         'two_col_crop': {'size': (140, 140), 'autocrop': True, 'crop': 'smart', 'upscale': True},
-        
+
+        'three_col':        {'size': (220, 220), 'autocrop': True,},
+        'three_col_crop':   {'size': (220, 220), 'autocrop': True, 'crop': 'smart', 'upscale': True},
+        'three_col_uncrop': {'size': (220, 660), 'autocrop': True},
+
         't_180':  {'size': (180, 180), 'autocrop': True, 'crop': 'smart', 'upscale': True},
         't_180t': {'size': (180, 240), 'autocrop': True, 'crop': '0,-10', 'upscale': True},
         't_180u': {'size': (180, 240), 'autocrop': True},
