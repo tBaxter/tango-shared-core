@@ -14,3 +14,5 @@ tango_shared_core.egg-info/not-zip-safe
 tango_shared_core.egg-info/top_level.txt
 
 *.gz
+
+tango_shared_core.egg-info/requires.txt

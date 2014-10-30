@@ -6,7 +6,7 @@ with open('docs/requirements.txt') as f:
 
 setup(
     name='tango-shared-core',
-    version='0.12.0',
+    version='0.12.1',
     author=u'Tim Baxter',
     author_email='mail.baxter@gmail.com',
     description='Tango shared/core functionality.',
@@ -15,6 +15,7 @@ setup(
     license='LICENSE',
     packages=find_packages(),
     zip_safe=False,
+    install_requires=required,
     include_package_data=True,
     dependency_links = [
         'http://github.com/tBaxter/django-voting/tarball/master#egg=tango-voting',

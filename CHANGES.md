@@ -1,5 +1,8 @@
 # Tango Shared Core Change Log
 
+### 0.12.1 -- 10.30.14
+* Fixed setup.py bug that kept dependencies from being loaded reliably.
+
 ### 0.12.0 -- 10.1.14
 * Added some template tag tests
 * renamed humanize_join to humanized_simple_join
