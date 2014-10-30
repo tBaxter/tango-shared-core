@@ -1,3 +1,2 @@
 language: python
-install: "pip install http://github.com/tBaxter/django-voting/tarball/master#egg=tango-voting --editable ."
 script: django-admin.py test --settings=test_settings

@@ -1,5 +1,8 @@
 # Tango Shared Core Change Log
 
+### 0.12.3
+* Better classification in setup.py
+
 ### 0.12.2
 * Pulling tango-voting from PyPi instead of Github.
 * skeleton of Travis support.

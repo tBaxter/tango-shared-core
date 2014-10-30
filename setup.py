@@ -6,15 +6,23 @@ with open('docs/requirements.txt') as f:
 
 setup(
     name='tango-shared-core',
-    version='0.12.2',
+    version='0.12.3',
     author=u'Tim Baxter',
     author_email='mail.baxter@gmail.com',
     description='Tango shared/core functionality.',
     long_description=open('README.md').read(),
     url='https://github.com/tBaxter/tango-shared-core',
-    license='LICENSE',
+    license='MIT',
     packages=find_packages(),
     zip_safe=False,
     install_requires=required,
-    include_package_data=True
+    include_package_data=True,
+    classifiers=[
+        "Development Status :: 4 - Beta",
+        "Environment :: Web Environment",
+        "Framework :: Django",
+        "Intended Audience :: Developers",
+        "License :: OSI Approved :: MIT License",
+        "Programming Language :: Python",
+    ],
 )
