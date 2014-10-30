@@ -1,5 +1,9 @@
 # Tango Shared Core Change Log
 
+### 0.12.2
+* Pulling tango-voting from PyPi instead of Github.
+* skeleton of Travis support.
+
 ### 0.12.1 -- 10.30.14
 * Fixed setup.py bug that kept dependencies from being loaded reliably.
 
