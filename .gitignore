@@ -3,15 +3,7 @@
 
 *.pyc
 
-tango_shared_core.egg-info/PKG-INFO
-
-tango_shared_core.egg-info/SOURCES.txt
-
-tango_shared_core.egg-info/dependency_links.txt
-
-tango_shared_core.egg-info/not-zip-safe
-
-tango_shared_core.egg-info/top_level.txt
+tango_shared_core.egg-info/*
 
 *.gz
 
