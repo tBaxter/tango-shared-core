@@ -1,3 +1,7 @@
+from __future__ import print_function
+
+import six
+
 from django.template import Library
 from django.utils.safestring import mark_safe
 
@@ -44,7 +48,7 @@ def humanized_simple_join(value):
 
     """
     # make everything a string to avoid errors
-    value = [unicode(item) for item in value]
+    value = [six.u(item) for item in value]
 
     if len(value) == 1: # one item in list
         return value[0]
@@ -81,13 +85,13 @@ def humanized_join(value, add_links=False):
         return value
     if add_links:
         try:
-            value = ['<a href="%s">%s</a>' % (item.get_absolute_url(), unicode(item)) for item in value]
+            value = ['<a href="%s">%s</a>' % (item.get_absolute_url(), six.u(item)) for item in value]
         except AttributeError:
-            print "You did not pass objects with get_absolute_url() method."
+            print("You did not pass objects with get_absolute_url() method.")
             return
     else:
         # make everything a string to avoid errors
-        value = [unicode(item) for item in value]
+        value = [six.u(item) for item in value]
 
     if len(value) == 1:
         return value[0]

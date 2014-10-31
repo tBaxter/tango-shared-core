@@ -1,4 +1,5 @@
 import re
+import six
 
 try:
     import urllib.parse as urlparse
@@ -130,9 +131,9 @@ def clean_text(value, topic=False):
     for bbset in BBCODE_REPLACEMENTS:
         p = re.compile(bbset[0], re.DOTALL)
         value = p.sub(bbset[1], value)
-    
+
     bleached = bleach.clean(value, tags=ALLOWED_TAGS, attributes=ALLOWED_ATTRIBUTES, strip=True)
-    
+
     # We want to retain markdown quotes and we'll be running bleach again in format_post.
     bleached = bleached.replace('&gt;', '>').replace('&amp;', '&')
     return bleached
@@ -210,7 +211,7 @@ def convert_links(text, trim_url_limit=None, nofollow=False, autoescape=False):
                         token = url.rsplit('/', 1)[1]
                         middle = '<iframe src="http://www.youtube.com/embed/%s" height="320" width="100%%"></iframe>' % token
                     except IndexError:
-                        middle = unicode(url)
+                        middle = six.u(url)
 
                 words[i] = mark_safe('%s%s%s' % (lead, middle, trail))
             else:

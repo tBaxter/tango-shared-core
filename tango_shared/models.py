@@ -1,4 +1,5 @@
 import datetime
+import six
 
 from PIL import Image
 
@@ -108,7 +109,7 @@ class BaseSidebarContentModel(models.Model):
     For sidebar-type additional info for content and sub-pages for content.
 
     Defines basic fields. Used for articles and happenings.
-    
+
     Should always be attached to larger content.
 
     """
@@ -123,7 +124,7 @@ class BaseSidebarContentModel(models.Model):
         abstract = True
 
     def __unicode__(self):
-        return unicode(self.title)
+        return six.u(self.title)
 
     def save(self, *args, **kwargs):
         self.text_formatted = sanetize_text(self.text)
@@ -132,9 +133,9 @@ class BaseSidebarContentModel(models.Model):
 
 class BaseUserContentModel(models.Model):
     """
-    Generic abstract model for user-submitted content to 
+    Generic abstract model for user-submitted content to
     have consistent sanitization and formatting.
-    
+
     """
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
     text = models.TextField()

@@ -5,6 +5,14 @@ __author__ = "Aaron Swartz"
 __credits__ = "Many thanks to pjz, bitsko, and DanC."
 __copyright__ = "(C) 2003-2006 Aaron Swartz. GNU GPL 2."
 
+"""
+This has been substantially rewritten for subsequent python versions,
+including python3 compatibility.
+
+The prior credits will be be maintained. Thank you, Aaron Swartz, for all you did.
+"""
+
+import six
 
 def isstr(f):
     return isinstance(f, type('')) or isinstance(f, type(u''))
@@ -110,16 +118,16 @@ class Element:
 
         out += '</'+qname(self._name, inprefixes)+'>'
         return out
-    
+
     def __unicode__(self):
         text = ''
         for x in self._dir:
-            text += unicode(x)
+            text += six.u(x)
         return ' '.join(text.split())
-        
+
     def __str__(self):
         return self.__unicode__().encode('utf-8')
-    
+
     def __getattr__(self, n):
         if n[0] == '_':
             raise AttributeError("Use foo['{}'] to access the child element.".format(n))
@@ -127,16 +135,16 @@ class Element:
         for x in self._dir:
             if isinstance(x, Element) and x._name == n: return x
         raise AttributeError('No child element named {}'.format(repr(n)))
-        
+
     def __hasattr__(self, n):
         for x in self._dir:
             if isinstance(x, Element) and x._name == n: return True
         return False
-        
+
     def __setattr__(self, n, v):
         if n[0] == '_': self.__dict__[n] = v
         else: self[n] = v
- 
+
 
     def __getitem__(self, n):
         if isinstance(n, type(0)): # d[1] == d._dir[1]
@@ -144,19 +152,19 @@ class Element:
         elif isinstance(n, slice(0).__class__):
             # numerical slices
             if isinstance(n.start, type(0)): return self._dir[n.start:n.stop]
-            
+
             n = n.start
             if self._dNS and not islst(n): n = (self._dNS, n)
             out = []
             for x in self._dir:
-                if isinstance(x, Element) and x._name == n: out.append(x) 
+                if isinstance(x, Element) and x._name == n: out.append(x)
             return out
         else: # d['foo'] == first <foo>
             if self._dNS and not islst(n): n = (self._dNS, n)
             for x in self._dir:
                 if isinstance(x, Element) and x._name == n: return x
             raise KeyError(n)
-    
+
     def __setitem__(self, n, v):
         if isinstance(n, type(0)): # d[1]
             self._dir[n] = v
@@ -203,7 +211,7 @@ class Element:
                     del self[i]
                 break
 
-    def __call__(self, *_pos, **_set): 
+    def __call__(self, *_pos, **_set):
         if _set:
             for k in _set.keys(): self._attrs[k] = set[k]
         if len(_pos) > 1:
@@ -303,13 +311,13 @@ def unittest():
     try:
         d._doesnotexist
         raise Exception("Expected Error but found success. Damn.")
-    except AttributeError: 
+    except AttributeError:
         pass
     assert d.bar._name == 'bar'
     try:
         d.doesnotexist
         raise Exception("Expected Error but found success. Damn.")
-    except AttributeError: 
+    except AttributeError:
         pass
     assert hasattr(d, 'bar') == True
     assert d('foo') == 'bar'
@@ -335,7 +343,7 @@ def unittest():
     bbc = Namespace("http://example.org/bbc")
     dc = Namespace("http://purl.org/dc/elements/1.1/")
     d = parse("""<doc version="2.7182818284590451"
-      xmlns="http://example.org/bar" 
+      xmlns="http://example.org/bar"
       xmlns:dc="http://purl.org/dc/elements/1.1/"
       xmlns:bbc="http://example.org/bbc">
         <author>John Polk and John Palfrey</author>
@@ -379,5 +387,5 @@ def unittest():
     assert quote('< dkdkdsd dkd sksdksdfsd fsdfdsf]]> kfdfkg >') == '&lt; dkdkdsd dkd sksdksdfsd fsdfdsf]]&gt; kfdfkg >'
     assert parse('<x a="&lt;"></x>').__repr__(1) == '<x a="&lt;"></x>'
     assert parse('<a xmlns="http://a"><b xmlns="http://b"/></a>').__repr__(1) == '<a xmlns="http://a"><b xmlns="http://b"></b></a>'
-    
+
 if __name__ == '__main__': unittest()
