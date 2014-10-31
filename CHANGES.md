@@ -1,5 +1,8 @@
 # Tango Shared Core Change Log
 
+### 0.12.4
+* Added shared user fixture to help dependent apps with Travis.
+
 ### 0.12.3
 * Better classification in setup.py
 
