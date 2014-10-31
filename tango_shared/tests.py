@@ -42,8 +42,6 @@ class TestSharedContent(TestCase):
 
 
 class TemplateTagsTests(TestCase):
-    fixtures = ['users.json']
-
     def setUp(self):
         self.test_list = ['apples', 'oranges']
 
@@ -64,6 +62,5 @@ class TemplateTagsTests(TestCase):
         self.test_list.append('pears')
         c = Context({"mylist": self.test_list})
         output = t.render(c)
-        print output
         self.assertEqual(output, 'apples, oranges, and pears')
 
