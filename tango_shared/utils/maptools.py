@@ -1,9 +1,10 @@
 from __future__ import print_function
 
 import urllib
-from django.conf import settings
 
-from ..utils import xmltramp
+from django.conf import settings
+from xmltramp2 import xmltramp
+
 
 
 def get_geocode(city, state, street_address="", zipcode=""):

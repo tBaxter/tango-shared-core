@@ -94,7 +94,7 @@ def humanized_join(value, add_links=False):
         value = [six.u(item) for item in value]
 
     if len(value) == 1:
-        return value[0]
+        return mark_safe(value[0])
     if len(value) == 2:
         return mark_safe("%s and %s" % (value[0], value[1]))
 

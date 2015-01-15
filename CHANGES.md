@@ -1,4 +1,6 @@
 # Tango Shared Core Change Log
+### 0.13.0
+* Removed internal xmltramp copy in favor of xmltramp2.
 
 ### 0.12.5
 * Passing tests for Python3 support
