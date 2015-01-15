@@ -1,4 +1,8 @@
 # Tango Shared Core Change Log
+
+### 0.14.0
+* Removed humanized_simple_join tag, improved humanized_join, and polished tests.
+
 ### 0.13.0
 * Removed internal xmltramp copy in favor of xmltramp2.
 

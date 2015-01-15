@@ -45,20 +45,20 @@ class TemplateTagsTests(TestCase):
     def setUp(self):
         self.test_list = ['apples', 'oranges']
 
-    def test_humanized_join_with_one_items(self):
+    def test_humanized_join(self):
         t = Template('{% load formatting %}{{ mylist|humanized_join }}')
+
+        # with one item
         c = Context({"mylist": 'foo'})
         output = t.render(c)
         self.assertEqual(output, 'foo')
 
-    def test_humanized_join_with_two_items(self):
-        t = Template('{% load formatting %}{{ mylist|humanized_join }}')
+        # with two items
         c = Context({"mylist": self.test_list})
         output = t.render(c)
         self.assertEqual(output, 'apples and oranges')
 
-    def test_humanized_join_with_more_items(self):
-        t = Template('{% load formatting %}{{ mylist|humanized_join }}')
+        # with three
         self.test_list.append('pears')
         c = Context({"mylist": self.test_list})
         output = t.render(c)
