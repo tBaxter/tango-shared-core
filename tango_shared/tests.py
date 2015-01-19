@@ -49,7 +49,7 @@ class TemplateTagsTests(TestCase):
         t = Template('{% load formatting %}{{ mylist|humanized_join }}')
 
         # with one item
-        c = Context({"mylist": 'foo'})
+        c = Context({"mylist": ['foo']})
         output = t.render(c)
         self.assertEqual(output, 'foo')
 
