@@ -48,17 +48,13 @@ def humanized_join(value, add_links=False):
     Passing the add_links option will wrap each item in a link.
     Note this requires that anything being passed has get_absolute_url() defined.
 
-    then {{ mylist|humanized_join:add_links }}
+    then {{ mylist|humanized_join:'add_links' }}
     will output "<a href="...">apples</a>, <a href="...">oranges</a>, and <a href="...">pears</a>"
 
     """
-    # If it's not a list, just return it
-    if not type(value) is list:
-        return value
-
     if add_links:
         try:
-            value = ['<a href="%s">%s</a>' % (item.get_absolute_url(), six.u(item)) for item in value]
+            value = ['<a href="%s">%s</a>' % (item.get_absolute_url(), item) for item in value]
         except AttributeError:
             print("You did not pass objects with get_absolute_url() method.")
             return

@@ -1,5 +1,11 @@
 # Tango Shared Core Change Log
 
+### 0.14.2
+* Addressing more issues in humanized_join.
+
+### 0.14.1
+* Addressing some issues in humanized_join.
+
 ### 0.14.0
 * Removed humanized_simple_join tag, improved humanized_join, and polished tests.
 
