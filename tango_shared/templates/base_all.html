@@ -72,22 +72,16 @@
 
       {% block section_nav %}{% endblock %}
 
-      <main role="main">
-        {% block content %}{% endblock %}
-      </main> <!-- /main -->
+      <main>{% block content %}{% endblock %}</main>
 
-      <div role="complementary">
-        {% block complementary %}{% endblock %}
-      </div><!-- /#content-side -->
+      <div role="complementary">{% block complementary %}{% endblock %}</div>
 
       {% block content_bottom %}{% endblock %}
     </div>
 
     <footer id="footer" role="contentinfo">
       {% block footer_nav %}
-        <nav role="navigation">
-          {% include 'includes/site_nav.html' %}
-        </nav>
+        <nav role="navigation">{% include 'includes/site_nav.html' %}</nav>
       {% endblock %}
       {% block footer %}
         <div>
@@ -97,15 +91,21 @@
       {% endblock %}
     </footer>
   </div> <!-- /#wrapper -->
-  {# Javascript at the bottom for fast page loading #}
-  {# see note above about modernizr at the bottom #}
-  <script src="{{ STATIC_URL }}js/libs/modernizr-2.6.1.min.js"></script>
-  {# init_js # is useful for vars and other initializing content #}
-  {% block init_js %}{% endblock %}
+
+  {# Javascript is at the bottom for faster page loading #}
+  {# see note in head about modernizr at the bottom #}
+  {% block modernizr %}
+    <script src="{{ STATIC_URL }}libs/modernizr-3.1.0.min.js"></script>
+  {% endblock %}
+
+  {% block init_js %}{% endblock %}{# useful for vars and other initializations #}
+
   {% block site_js %}
     <script src="{{ STATIC_URL }}js/site-combined-min.js"></script>
   {% endblock %}
+
   {% block app_js %}{% endblock %}
+
   {% block extrascript %}{% endblock %}
 
   {# asynchronous google analytics: mathiasbynens.be/notes/async-analytics-snippet #}

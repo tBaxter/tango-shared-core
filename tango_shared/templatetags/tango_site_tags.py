@@ -28,40 +28,44 @@ def fix_indents(value):
 def get_fresh_content(top=4, additional=10, featured=False):
     """
     Requires articles, photos and video packages to be installed.
-    
+
     Returns published *Featured* content (articles, galleries, video, etc)
     and an additional batch of fresh regular (featured or not) content.
-    
+
     The number of objects returned is defined when the tag is called.
-    
+
     The top item type is defined in the sites admin for sites that
     have the supersites app enabled.
-    
+
     If "featured" is True, will limit to only featured content.
-    
+
     Usage::
 
         {% get_fresh_content 5 10 %}
-        
+
     Would return five top objects and 10 additional
-    
+
         {% get_fresh_content 4 8 featured %}
-    
+
     Would return four top objects and 8 additional, limited to featured content.
-    
+
     What you get::
 
         'top_item':       the top featured item
         'top_item_type':  the content type for the top item (article, gallery, video)
-        'featured':       Additional featured items. If you asked for 5 featureed items, there will be 4
-                          (five - the one that's in top item)
+        'featured':       Additional featured items.
+                          If you asked for 5 featureed items,
+                          there will be four -- five minus the one that's in `top_item`.
         'articles':       featured articles, minus the top item
         'galleries':      featured galleries, minus the top item
         'vids':           featured video, minus the top item,
-        'more_articles':  A stack of articles, excluding what's in featured, sliced to the number passed for <num_regular>,
-        'more_galleries': A stack of galleries, excluding what's in featured, sliced to the number passed for <num_regular>,
-        'additional':     A mixed list of articles and galleries, excluding what's in featured, sliced to the number passed for <num_regular>,
-    
+        'more_articles':  A stack of articles, excluding what's in featured,
+                          sliced to the number passed for <num_regular>,
+        'more_galleries': A stack of galleries, excluding what's in featured,
+                          sliced to the number passed for <num_regular>,
+        'additional':     A mixed list of articles and galleries, excluding what's in featured,
+                          sliced to the number passed for <num_regular>,
+
     """
     from articles.models import Article
     from photos.models import Gallery
@@ -126,14 +130,20 @@ def markdown(value, arg=''):
         import markdown
     except ImportError:
         if settings.DEBUG:
-            raise template.TemplateSyntaxError("Error in 'markdown' filter: The Python markdown library isn't installed.")
+            raise template.TemplateSyntaxError(
+                "Error in 'markdown' filter: The Python markdown library isn't installed."
+            )
         return force_text(value)
     else:
         markdown_vers = getattr(markdown, "version_info", 0)
         if markdown_vers < (2, 1):
             if settings.DEBUG:
                 raise template.TemplateSyntaxError(
-                    "Error in 'markdown' filter: Django does not support versions of the Python markdown library < 2.1.")
+                    """
+                    Error in 'markdown' filter:
+                    Django does not support versions of the Python markdown library < 2.1.
+                    """
+                )
             return force_text(value)
         else:
             extensions = [e for e in arg.split(",") if e]
@@ -144,4 +154,3 @@ def markdown(value, arg=''):
             else:
                 return mark_safe(markdown.markdown(
                     force_text(value), extensions, safe_mode=False))
-

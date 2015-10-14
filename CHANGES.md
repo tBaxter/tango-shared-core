@@ -1,5 +1,15 @@
 # Tango Shared Core Change Log
 
+### 0.16.0
+* Updated to modernizr 3.1 custom build and moved it to /static/libs. HTML5shiv has been removed, although the template block is still available if you need to add it in yourself.
+See the modernizr file for details of custom build.
+
+### 0.15
+* Standardized thumbnail settings and names around standard column grid. Note: this is a backward-incompatible change.
+
+### 0.14.3
+* Minor base template changes for improved semantics and removing extraneous whitespace.
+
 ### 0.14.2
 * Addressing more issues in humanized_join.
 

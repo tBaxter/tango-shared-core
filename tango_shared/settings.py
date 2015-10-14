@@ -3,33 +3,55 @@ import django.conf.global_settings as DEFAULT_SETTINGS
 ### Tango-unique settings
 
 # Thumbnail aliases determines default image sizes for easy-thumbnails
+# These assume a standard 60px column + 20px gutter.
+# See the grid CSS for details.
 THUMBNAIL_ALIASES = {
     '': {
-        'thumb':        {'size': (50, 50),   'autocrop': True, 'crop': 'smart', 'upscale': True},
         'one_col':      {'size': (60, 60),   'autocrop': True, 'crop': 'smart', 'upscale': True},
-        't_80':         {'size': (80, 80),   'autocrop': True, 'crop': 'smart', 'upscale': True},
 
-        'two_col':      {'size': (140, 140), 'autocrop': True,},
+        'two_col':      {'size': (140, 140), 'autocrop': True},
         'two_col_crop': {'size': (140, 140), 'autocrop': True, 'crop': 'smart', 'upscale': True},
+        'two_col_vert': {'size': (140, 420), 'autocrop': True, 'crop': 'smart', 'upscale': True},
 
-        'three_col':        {'size': (220, 220), 'autocrop': True,},
-        'three_col_crop':   {'size': (220, 220), 'autocrop': True, 'crop': 'smart', 'upscale': True},
-        'three_col_uncrop': {'size': (220, 660), 'autocrop': True},
+        'three_col':      {'size': (220, 220), 'autocrop': True},
+        'three_col_crop': {'size': (220, 220), 'autocrop': True, 'crop': 'smart', 'upscale': True},
+        'three_col_vert': {'size': (220, 660), 'autocrop': True},
 
-        't_180':  {'size': (180, 180), 'autocrop': True, 'crop': 'smart', 'upscale': True},
-        't_180t': {'size': (180, 240), 'autocrop': True, 'crop': '0,-10', 'upscale': True},
-        't_180u': {'size': (180, 240), 'autocrop': True},
-        't_360':  {'size': (360, 360), 'autocrop': True, 'crop': 'smart', 'upscale': True},
-        't_360u': {'size': (360, 540), 'autocrop': True},
-        't_420':  {'size': (420, 420), 'autocrop': True, 'crop': 'scale'},
-        't_420u': {'size': (420, 420), 'autocrop': True},
+        'four_col':      {'size': (300, 300), 'autocrop': True},
+        'four_col_crop': {'size': (300, 300), 'autocrop': True, 'crop': 'smart', 'upscale': True},
+        'four_col_vert': {'size': (300, 900), 'autocrop': True},
 
-        't_540':  {'size': (540, 540), 'autocrop': True, 'crop': 'scale'},
-        't_540u': {'size': (540, 540), 'autocrop': True},
+        'five_col':      {'size': (380, 380), 'autocrop': True},
+        'five_col_crop': {'size': (380, 380), 'autocrop': True, 'crop': 'smart', 'upscale': True},
+        'five_col_vert': {'size': (380, 900), 'autocrop': True},
 
-        't_640':  {'size': (640, 640), 'autocrop': True, 'crop': 'scale'},
-        't_720':  {'size': (720, 720), 'autocrop': True, 'crop': 'scale'},
-        't_960':  {'size': (960, 960), 'autocrop': True, 'crop': 'scale'},
+        'six_col':      {'size': (460, 460), 'autocrop': True},
+        'six_col_crop': {'size': (460, 460), 'autocrop': True, 'crop': 'smart', 'upscale': True},
+        'six_col_vert': {'size': (460, 900), 'autocrop': True},
+
+        'seven_col':      {'size': (540, 540), 'autocrop': True},
+        'seven_col_crop': {'size': (540, 540), 'autocrop': True, 'crop': 'smart', 'upscale': True},
+        'seven_col_vert': {'size': (540, 1080), 'autocrop': True},
+
+        'eight_col':      {'size': (620, 620), 'autocrop': True},
+        'eight_col_crop': {'size': (620, 620), 'autocrop': True, 'crop': 'smart', 'upscale': True},
+        'eight_col_vert': {'size': (620, 1240), 'autocrop': True},
+
+        'nine_col':      {'size': (700, 700), 'autocrop': True},
+        'nine_col_crop': {'size': (700, 700), 'autocrop': True, 'crop': 'smart', 'upscale': True},
+        'nine_col_vert': {'size': (700, 1400), 'autocrop': True},
+
+        'ten_col':      {'size': (780, 780), 'autocrop': True},
+        'ten_col_crop': {'size': (780, 780), 'autocrop': True, 'crop': 'smart', 'upscale': True},
+        'ten_col_vert': {'size': (780, 1560), 'autocrop': True},
+
+        'eleven_col':      {'size': (860, 860), 'autocrop': True},
+        'eleven_col_crop': {'size': (860, 860), 'autocrop': True, 'crop': 'smart', 'upscale': True},
+        'eleven_col_vert': {'size': (860, 1640), 'autocrop': True},
+
+        'twelve_col':      {'size': (940, 940), 'autocrop': True},
+        'twelve_col_crop': {'size': (940, 940), 'autocrop': True, 'crop': 'smart', 'upscale': True},
+        'twelve_col_vert': {'size': (940, 1880), 'autocrop': True},
     },
 }
 
