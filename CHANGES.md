@@ -1,6 +1,9 @@
 # Tango Shared Core Change Log
 
-### 0.16.0
+### 0.16.1
+* Include custom build of markitup to avoid errors in dependent apps
+
+### 0.16.0  10.14.15
 * Updated to modernizr 3.1 custom build and moved it to /static/libs. HTML5shiv has been removed, although the template block is still available if you need to add it in yourself.
 See the modernizr file for details of custom build.
 
