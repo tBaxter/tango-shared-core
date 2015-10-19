@@ -1,5 +1,8 @@
 # Tango Shared Core Change Log
 
+### 0.16.2
+Defined tango_markdown_settings for markitup, for easier initialization
+
 ### 0.16.1
 * Include custom build of markitup to avoid errors in dependent apps
 

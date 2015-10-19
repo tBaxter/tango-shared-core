@@ -4,7 +4,7 @@
 // Copyright (C) 2008 Jay Salvat
 // http://markitup.jaysalvat.com/
 // ----------------------------------------------------------------------------
-var gp_markdown_settings = {
+var tango_markdown_settings = {
   nameSpace:          'markdown', // Useful to prevent multi-instances CSS conflict
   //previewParserPath:  '~/sets/markdown/preview.php',
   onShiftEnter:       { keepDefault:false, openWith:'\n\n' },
@@ -12,7 +12,13 @@ var gp_markdown_settings = {
     {name:'Bold',      key:'B', openWith:'**', closeWith:'**', className:'icon-bold' },
     {name:'Italic',    key:'I', openWith:'*', closeWith:'*', className:'icon-italic'},
     {name:'Quotes',    key:'Q', openWith:'> ', className:'icon-quote'},
-    {name:'Link', key:'L', openWith:'[', closeWith:']([![Link:!:http://]!])', placeHolder:'Link', className:'icon-link'},
+    {name:'Link',
+      key:'L',
+      openWith:'[',
+      closeWith:']([![Link:!:http://]!])',
+      placeHolder:'Link',
+      className:'icon-link'
+    },
     {name:'Bulleted List', openWith:'- ', closeWith:'  ', multiline:true, className:'icon-ul'},
     {
       name:'Numeric List',
@@ -63,3 +69,4 @@ var miu = {
     return '\n'+heading+'\n';
   }
 };
+
