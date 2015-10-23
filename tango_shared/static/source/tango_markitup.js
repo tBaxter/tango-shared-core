@@ -7,7 +7,10 @@
 var tango_markdown_settings = {
   nameSpace:          'markdown', // Useful to prevent multi-instances CSS conflict
   //previewParserPath:  '~/sets/markdown/preview.php',
-  onShiftEnter:       { keepDefault:false, openWith:'\n\n' },
+  onShiftEnter:       {
+    keepDefault:false,
+    openWith:'\n\n'
+  },
   markupSet: [
     {name:'Bold',      key:'B', openWith:'**', closeWith:'**', className:'icon-bold' },
     {name:'Italic',    key:'I', openWith:'*', closeWith:'*', className:'icon-italic'},
@@ -37,7 +40,9 @@ var tango_markdown_settings = {
       }
     },
     {separator:'---------------' },
-    { name:'Smileys', className:'emoticon-happy sub-nav', dropMenu: [
+    { name:'Smileys',
+      className:'emoticon-happy sub-nav',
+      dropMenu: [
         {name:'Big smile', openWith:' :-D ',  className:'emoticon-grin'},
         {name:'Smiley',    openWith:' :-) ',  className:'emoticon-happy'},
         {name:'Neutral',   openWith:' :| ',   className:'emoticon-displeased'},
@@ -57,7 +62,6 @@ var tango_markdown_settings = {
   ]
 };
 
-
 // mIu nameSpace to avoid conflict.
 var miu = {
   markdownTitle: function(markItUp, character) {
@@ -70,3 +74,5 @@ var miu = {
   }
 };
 
+// INIT markitup
+$('.markitup-form textarea').markItUp(tango_markdown_settings);

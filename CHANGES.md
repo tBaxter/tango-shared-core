@@ -1,5 +1,14 @@
 # Tango Shared Core Change Log
 
+### 0.16.5
+Recompiled JS
+
+### 0.16.4
+Increment for pypi
+
+### 0.16.3
+Initialized markitup on any .markitup-form textarea
+
 ### 0.16.2
 Defined tango_markdown_settings for markitup, for easier initialization
 
