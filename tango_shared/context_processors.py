@@ -23,14 +23,13 @@ def site_processor(request):
         last_seen_fuzzy = one_day_ago
 
     return {
-        'site'            : Site.objects.get_current(),
-        'now'             : now,
-        'year'            : now.year,
-        'ga_code'         : settings.GOOGLE_ANALYTICS_ID,
-        'project_name'    : settings.PROJECT_NAME,
-        'current_path'    : request.get_full_path(),
-        'last_seen'       : last_seen,
-        'last_seen_fuzzy' : last_seen_fuzzy,
-        'theme'           : theme,
+        'site': Site.objects.get_current(),
+        'now': now,
+        'ga_code': settings.GOOGLE_ANALYTICS_ID,
+        'project_name': settings.PROJECT_NAME,
+        'current_path': request.get_full_path(),
+        'last_seen': last_seen,
+        'last_seen_fuzzy': last_seen_fuzzy,
+        'theme': theme,
         'authenticated_request': authenticated_request,
     }

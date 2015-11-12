@@ -1,7 +1,17 @@
 # Tango Shared Core Change Log
 
-### 0.17.0
+
+### 1.0.0-- 11.12.15
+* Added docs
+* Went to 1.0
+
+
+### 0.17.1
+Made minification middleware safe to use with pre tags.
+
+### 0.17.0 -- 11.12.15
 Updated minification middleware
+
 
 ### 0.16.5
 Recompiled JS
@@ -21,6 +31,7 @@ Defined tango_markdown_settings for markitup, for easier initialization
 ### 0.16.0  10.14.15
 * Updated to modernizr 3.1 custom build and moved it to /static/libs. HTML5shiv has been removed, although the template block is still available if you need to add it in yourself.
 See the modernizr file for details of custom build.
+
 
 ### 0.15
 * Standardized thumbnail settings and names around standard column grid. Note: this is a backward-incompatible change.
