@@ -1,5 +1,8 @@
 # Tango Shared Core Change Log
 
+### 0.17.0
+Updated minification middleware
+
 ### 0.16.5
 Recompiled JS
 

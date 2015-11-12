@@ -1,25 +1,26 @@
 import re
-from django.utils.html import strip_spaces_between_tags as strip_spaces
 
-RE_MULTISPACE = re.compile(r"\s{2,}")
-RE_NEWLINE = re.compile(r"\n")
+RE_MULTISPACE = re.compile(r"\s{4,}")
+RE_NEWLINE = re.compile(r"\n\n")
 
 
-class SpacelessMiddleware(object):
-    """
-    Removes spaces between tags site-wide.
-    Deprecated by smarter MinifyHTMLMiddleware below.
-    """
+class StripEmptyLines(object):
+    """ Remove extra newlines from HTML output """
     def process_response(self, request, response):
         if 'text/html' in response['Content-Type']:
-            response.content = strip_spaces(response.content)
+            response.content = RE_NEWLINE.sub("\n", response.content)
+            # do it again to catch leftovers
+            response.content = RE_NEWLINE.sub("\n", response.content)
         return response
 
 
-class MinifyHTMLMiddleware(object):
-    """ Remove newlines and extraneous spaces from HTML output """
+class CompactHTMLMiddleware(object):
+    """
+    Remove extra newlines and extraneous spaces from HTML output,
+    creating compact layout.
+     """
     def process_response(self, request, response):
         if 'text/html' in response['Content-Type']:
             response.content = RE_MULTISPACE.sub(" ", response.content)
-            response.content = RE_NEWLINE.sub("", response.content)
+            response.content = RE_NEWLINE.sub("\n", response.content)
         return response
