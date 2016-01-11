@@ -14,6 +14,8 @@ DATABASES = {
     }
 }
 
+AUTH_USER_MODEL = 'auth.User'
+
 SITE_ID = 1
 
 #stripped down middleware
