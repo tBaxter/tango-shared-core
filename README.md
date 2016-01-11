@@ -36,3 +36,11 @@ You already have developer documentation in the admin. This gives you hooks to i
 
 ### JS
 * A solid implementation of Markitup
+
+## Installation
+Installation should be automatic, from the application needing it.
+
+You can also install from pip or github.
+
+If you run into appRegistry issues, be sure  `INSTALLED_APPS` contains
+`easy_thumbnails` and  `django.contrib.contenttypes`.

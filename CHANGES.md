@@ -1,5 +1,8 @@
 # Tango Shared Core Change Log
 
+### 1.1
+Updated for Django 1.8 and up.
+
 ### 1.0.1
 Removed call to non-existing user_profiles app.
 If you'd like to user the tango_users profile app, manually add it to your installed apps.
