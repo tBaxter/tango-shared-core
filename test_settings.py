@@ -1,6 +1,7 @@
 SECRET_KEY = "lorem ipsum"
 
 INSTALLED_APPS = (
+    'easy_thumbnails',
     'tango_shared',
 )
 
