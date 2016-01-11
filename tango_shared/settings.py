@@ -88,7 +88,6 @@ COMMENTS_MOD_AFTER = 15
 TANGO_APPS = (
     'tango_capo',
     'tango_shared',
-    'user_profiles',
     'articles',
     'autotagger',
     'contact_manager',
@@ -99,10 +98,10 @@ TANGO_APPS = (
     'voting',
     'easy_thumbnails',
 )
+# tango_users is not added by default. Add it to your apps as you wish.
 
 
 ### Django settings...
-
 MEDIA_URL = '/media/'
 STATIC_URL = '/static/'
 

@@ -1,5 +1,8 @@
 # Tango Shared Core Change Log
 
+### 1.0.1
+Removed call to non-existing user_profiles app.
+If you'd like to user the tango_users profile app, manually add it to your installed apps.
 
 ### 1.0.0-- 11.12.15
 * Added docs
