@@ -4,6 +4,7 @@ INSTALLED_APPS = (
     'easy_thumbnails',
     'django.contrib.auth',
     'django.contrib.contenttypes',
+    'django.contrib.sites',
     'voting',
     'tango_shared',
 )

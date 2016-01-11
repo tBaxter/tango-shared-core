@@ -1,13 +1,13 @@
 from django import template
-from django.contrib.sites.models import Site
+from django.contrib.sites.shortcuts import get_current_site
 from django.contrib.contenttypes.models import ContentType
 
 register = template.Library()
 
 
 @register.inclusion_tag('includes/social_links.html')
-def social_links(object, user=None, authenticated_request=False, vote_down=False, vote_down_msg=None):
-    current_site = Site.objects.get_current()
+def social_links(object, user=None, authenticated=False, vote_down=False, vote_down_msg=None):
+    current_site = get_current_site()
     c_type = ContentType.objects.get_for_model(object)
     # check if voting available
     voting = False
@@ -23,5 +23,5 @@ def social_links(object, user=None, authenticated_request=False, vote_down=False
         'voting': voting,
         'vote_down': vote_down,
         'vote_down_msg': vote_down_msg,
-        'authenticated_request': authenticated_request,
+        'authenticated_request': authenticated,
     }
