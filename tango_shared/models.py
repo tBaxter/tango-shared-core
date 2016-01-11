@@ -4,7 +4,6 @@ import six
 from PIL import Image
 
 from django.conf import settings
-from django.contrib.sites.models import Site
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
 from django.utils.functional import cached_property
@@ -18,7 +17,7 @@ from tango_shared.utils.sanetize import clean_text, format_text, sanetize_text
 
 now = datetime.datetime.utcnow()
 
-comments_close_days    = getattr(settings, 'COMMENTS_CLOSE_AFTER', 30)
+comments_close_days = getattr(settings, 'COMMENTS_CLOSE_AFTER', 30)
 comments_moderate_days = getattr(settings, 'COMMENTS_MOD_AFTER', 30)
 
 
@@ -26,7 +25,9 @@ def set_img_path(instance, filename):
     """
     Sets upload_to dynamically
     """
-    upload_path = '/'.join(['img', instance._meta.app_label, str(now.year), str(now.month), filename])
+    upload_path = '/'.join(
+        ['img', instance._meta.app_label, str(now.year), str(now.month), filename]
+    )
     return upload_path
 
 
@@ -75,7 +76,7 @@ class BaseContentModel(models.Model):
 
     featured = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
-    sites = models.ManyToManyField(Site, default=[settings.SITE_ID])
+    sites = models.ManyToManyField('sites.Site', default=[settings.SITE_ID])
     enable_comments = models.BooleanField(default=True)
     last_modified = models.DateTimeField(auto_now=True)
     published = models.BooleanField(default=True)
@@ -114,8 +115,8 @@ class BaseSidebarContentModel(models.Model):
 
     """
     title = models.CharField(max_length=300)
-    slug  = models.SlugField(help_text="Only needed if this is not a sidebar")
-    text  = models.TextField()
+    slug = models.SlugField(help_text="Only needed if this is not a sidebar")
+    text = models.TextField()
     text_formatted = models.TextField(blank=True, null=True, editable=False)
     is_sidebar = models.BooleanField(default=False)
     image = models.ImageField(upload_to=set_img_path, blank=True, null=True)
@@ -165,8 +166,8 @@ class ContentImage(models.Model):
     It is abstract, and must be subclassed.
     """
     image = ThumbnailerImageField(
-        upload_to = set_img_path,
-        help_text = "Image size should be a minimum of 720px and no more than 2000px (width or height)",
+        upload_to=set_img_path,
+        help_text="Size should be a minimum of 720px and no more than 2000px high or wide.",
         blank=True
     )
     caption = models.CharField(max_length=255, blank=True, null=True)
@@ -209,7 +210,7 @@ class ContentImage(models.Model):
         if self.id is None or self.thumb is None or (old_self.image != img):
             try:
                 height = img.height
-                width  = img.width
+                width = img.width
             except Exception as error:
                 # We aren't dealing with a reliable image, so....
                 #print("Error getting image height or width: {}".format(error))
