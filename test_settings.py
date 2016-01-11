@@ -2,6 +2,7 @@ SECRET_KEY = "lorem ipsum"
 
 INSTALLED_APPS = (
     'easy_thumbnails',
+    'django.contrib.auth',
     'django.contrib.contenttypes',
     'voting',
     'tango_shared',
@@ -13,8 +14,6 @@ DATABASES = {
         'NAME': ':memory:',
     }
 }
-
-AUTH_USER_MODEL = 'auth.User'
 
 SITE_ID = 1
 
