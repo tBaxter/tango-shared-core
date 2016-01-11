@@ -3,7 +3,7 @@ SECRET_KEY = "lorem ipsum"
 INSTALLED_APPS = (
     'easy_thumbnails',
     'django.contrib.contenttypes',
-    'tango_voting',
+    'voting',
     'tango_shared',
 )
 
