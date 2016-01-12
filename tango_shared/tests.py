@@ -1,8 +1,18 @@
+import unittest
+
 from django.conf import settings
 from django.core.urlresolvers import reverse
+from django.db import models
 from django.template import Template, Context
 from django.test import TestCase
-import unittest
+
+
+class DummyModel(models.Model):
+    """
+    Dummy model for testing below
+    """
+    def get_absolute_url(self):
+        return '/'
 
 
 class TestSharedContent(TestCase):
@@ -67,7 +77,8 @@ class TemplateTagsTests(TestCase):
 
     def test_social_links(self):
         t = Template('{% load social_tags %}{% social_links object %}')
-        c = Context({"object": ['foo']})
+        obj = DummyModel.objects.create()
+        c = Context({"object": obj})
         output = t.render(c)
         self.assertTrue('facebook' in output)
         self.assertTrue('twitter' in output)
