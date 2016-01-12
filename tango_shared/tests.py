@@ -8,7 +8,7 @@ import unittest
 class TestSharedContent(TestCase):
 
     def setUp(self):
-        self.slug    = 'admin'
+        self.slug = 'admin'
 
     @unittest.skip("Makes multiple generous assumptions about project behaviour")
     def test_template_media(self):
@@ -16,8 +16,9 @@ class TestSharedContent(TestCase):
         Ensures base template has required media files.
         """
         response = self.client.get(reverse('home'))
-        favicon_url = '<link rel="shortcut icon" href="{}img/favicon.png">'.format(settings.STATIC_URL)
-        touch_icon = '<link rel="apple-touch-icon" href="{}img/touch-icon.png">'.format(settings.STATIC_URL)
+        static_url = settings.STATIC_URL
+        favicon_url = '<link rel="shortcut icon" href="{}img/favicon.png">'.format(static_url)
+        touch_icon = '<link rel="apple-touch-icon" href="{}img/touch-icon.png">'.format(STATIC_URL)
         self.assertEqual(response.status_code, 200)
         self.assertTrue(favicon_url in response.content)
         self.assertTrue(touch_icon in response.content)
@@ -64,3 +65,9 @@ class TemplateTagsTests(TestCase):
         output = t.render(c)
         self.assertEqual(output, 'apples, oranges, and pears')
 
+    def test_social_links(self):
+        t = Template('{% load social_tags %}{% social_links object %}')
+        c = Context({"object": ['foo']})
+        output = t.render(c)
+        self.assertTrue('facebook' in output)
+        self.assertTrue('twitter' in output)
