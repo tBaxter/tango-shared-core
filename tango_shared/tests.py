@@ -1,14 +1,25 @@
+import unittest
+
 from django.conf import settings
 from django.core.urlresolvers import reverse
-from django.template import Template, Context
+from django.db import models
+from django.http import HttpRequest
+from django.template import Template, Context, RequestContext
 from django.test import TestCase
-import unittest
+
+
+class DummyModel(models.Model):
+    """
+    Dummy model for testing below
+    """
+    def get_absolute_url(self):
+        return '/'
 
 
 class TestSharedContent(TestCase):
 
     def setUp(self):
-        self.slug    = 'admin'
+        self.slug = 'admin'
 
     @unittest.skip("Makes multiple generous assumptions about project behaviour")
     def test_template_media(self):
@@ -16,8 +27,9 @@ class TestSharedContent(TestCase):
         Ensures base template has required media files.
         """
         response = self.client.get(reverse('home'))
-        favicon_url = '<link rel="shortcut icon" href="{}img/favicon.png">'.format(settings.STATIC_URL)
-        touch_icon = '<link rel="apple-touch-icon" href="{}img/touch-icon.png">'.format(settings.STATIC_URL)
+        static_url = settings.STATIC_URL
+        favicon_url = '<link rel="shortcut icon" href="{}img/favicon.png">'.format(static_url)
+        touch_icon = '<link rel="apple-touch-icon" href="{}img/touch-icon.png">'.format(STATIC_URL)
         self.assertEqual(response.status_code, 200)
         self.assertTrue(favicon_url in response.content)
         self.assertTrue(touch_icon in response.content)
@@ -63,4 +75,3 @@ class TemplateTagsTests(TestCase):
         c = Context({"mylist": self.test_list})
         output = t.render(c)
         self.assertEqual(output, 'apples, oranges, and pears')
-
