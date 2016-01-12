@@ -4,6 +4,7 @@ from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.template import Template, Context
+from django.template.loader import render_to_string
 from django.test import TestCase
 
 
@@ -78,7 +79,6 @@ class TemplateTagsTests(TestCase):
     def test_social_links(self):
         t = Template('{% load social_tags %}{% social_links object %}')
         obj = DummyModel.objects.create()
-        c = Context({"object": obj})
-        output = t.render(c)
+        output = render_to_string(t, {"object": obj})
         self.assertTrue('facebook' in output)
         self.assertTrue('twitter' in output)
