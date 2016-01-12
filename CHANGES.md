@@ -1,6 +1,9 @@
 # Tango Shared Core Change Log
 
-### 1.1
+### 1.1.1
+Better request handling in social tags
+
+### 1.1.0
 Updated for Django 1.8 and up.
 
 ### 1.0.1
