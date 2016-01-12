@@ -75,12 +75,3 @@ class TemplateTagsTests(TestCase):
         c = Context({"mylist": self.test_list})
         output = t.render(c)
         self.assertEqual(output, 'apples, oranges, and pears')
-
-    def test_social_links(self):
-        t = Template('{% load social_tags %}{% social_links object %}')
-        obj = DummyModel.objects.create()
-        request = HttpRequest()
-        c = RequestContext(request, {"object": obj})
-        output = t.render(c)
-        self.assertTrue('facebook' in output)
-        self.assertTrue('twitter' in output)
