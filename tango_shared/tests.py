@@ -3,8 +3,8 @@ import unittest
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.db import models
-from django.template import Template, Context
-from django.template.loader import render_to_string
+from django.http import HttpRequest
+from django.template import Template, Context, RequestContext
 from django.test import TestCase
 
 
@@ -79,6 +79,8 @@ class TemplateTagsTests(TestCase):
     def test_social_links(self):
         t = Template('{% load social_tags %}{% social_links object %}')
         obj = DummyModel.objects.create()
-        output = render_to_string(t, {"object": obj})
+        request = HttpRequest()
+        c = RequestContext(request, {"object": obj})
+        output = t.render(c)
         self.assertTrue('facebook' in output)
         self.assertTrue('twitter' in output)
