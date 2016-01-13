@@ -1,5 +1,8 @@
 # Tango Shared Core Change Log
 
+### 1.1.2
+Locked down request handling, added tests for it.
+
 ### 1.1.1
 Better request handling in social tags
 
