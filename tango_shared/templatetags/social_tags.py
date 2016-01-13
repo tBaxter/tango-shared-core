@@ -24,7 +24,7 @@ def social_links(context, object, user=None, authed=False, downable=False, vote_
     return {
         'object': object,
         'url':    object.get_absolute_url(),
-        'site':   get_current_site(context['request']),
+        'site':   get_current_site(context.request),
         'ctype':  ContentType.objects.get_for_model(object),
         'user':   user,
         'voting': voting,
