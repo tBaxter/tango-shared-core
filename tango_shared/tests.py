@@ -82,6 +82,5 @@ class TemplateTagsTests(TestCase):
         request = HttpRequest()
         c = RequestContext(request, {"object": obj})
         output = t.render(c)
-        console.log(output)
         self.assertTrue('facebook' in output)
         self.assertTrue('twitter' in output)
