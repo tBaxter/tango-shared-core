@@ -1,9 +1,10 @@
 import os
-
 import markdown
+
+from importlib import import_module
+
 from django.conf import settings
 from django.shortcuts import render
-from django.utils.importlib import import_module
 from django.views.generic import ListView, TemplateView, DetailView
 
 
@@ -52,5 +53,5 @@ def build_howto(request=None):
         if os.path.exists(how_to_file):
             contents = open(how_to_file).read()
             how_tos[app] = markdown.markdown(contents)
-        
+
     return render(request, 'admin/how-to/index.html', {'how_tos': how_tos})

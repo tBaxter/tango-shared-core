@@ -1,5 +1,8 @@
 # Tango Shared Core Change Log
 
+### 1.1.3
+Update import_module to keep Django 1.9 happy.
+
 ### 1.1.2
 Locked down request handling, added tests for it.
 
