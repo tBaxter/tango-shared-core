@@ -16,7 +16,9 @@ from django.utils.html import TRAILING_PUNCTUATION, WRAPPING_PUNCTUATION, \
     escape, word_split_re, simple_url_re, simple_url_2_re, smart_urlquote, simple_email_re
 
 
-# These are based on defaults from bleach.
+# These are tags we will allow in our santized version.
+# Based on defaults from Bleach.
+# See https://bleach.readthedocs.io/en/latest/
 ALLOWED_TAGS = (
     'a',
     'b',
@@ -37,6 +39,8 @@ ALLOWED_TAGS = (
     'iframe'
 )
 
+# These are the only valid attributes.
+# Again, this is based on Bleach defaults.
 ALLOWED_ATTRIBUTES = {
     'a':   ('href', 'title', 'rel'),
     'img': ('src', 'alt'),
@@ -44,7 +48,8 @@ ALLOWED_ATTRIBUTES = {
     '*':   ('class',),
 }
 
-
+# Be cautious with profanity replacements.
+# False positives are a mothersmurfer.
 PROFANITY_REPLACEMENTS = (
     ('fuck',    'smurf'),
     ('FUCK',    'SMURF'),
@@ -56,6 +61,9 @@ PROFANITY_REPLACEMENTS = (
     ('Fucking', 'Smurfing'),
 )
 
+# Simple regexes to allow the use of most BBCODE.
+# If you don't support BBCODE, then this isn't particularly useful
+# but I find it helpful if things just work as the user expects them to.
 BBCODE_REPLACEMENTS = (
     (r'\[url\](.+?)\[/url\]',       r'\[link\]\(\1\)'),
     (r'\[url=(.+?)\](.+?)\[/url\]', r'\[\2\]\(\1\)'),
@@ -67,6 +75,9 @@ BBCODE_REPLACEMENTS = (
     (r'\[quote\](.+?)\[/quote\]',   r'<blockquote>\1</blockquote>'),
 )
 
+# Simple smiley/emoticon/emoji integration. 
+# To-Do: allow more Slack-ish options.
+# note that the actual integration with emojis still has to be handled.
 EMOTICON_REPLACEMENTS = (
     (' :) ',       'happy'),
     (':-)',        'happy'),
