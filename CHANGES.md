@@ -1,5 +1,8 @@
 # Tango Shared Core Change Log
 
+### 1.1.4
+Update to sanetize to reflect changes in Django 1.11
+
 ### 1.1.3
 Update import_module to keep Django 1.9 happy.
 
