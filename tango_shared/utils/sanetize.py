@@ -13,7 +13,7 @@ from django.template.defaultfilters import urlizetrunc
 from django.utils.encoding import force_text
 from django.utils.safestring import SafeData, mark_safe
 from django.utils.html import TRAILING_PUNCTUATION, WRAPPING_PUNCTUATION, \
-    escape, word_split_re, simple_url_re, simple_url_2_re, smart_urlquote, simple_email_re
+    escape, word_split_re, simple_url_re, simple_url_2_re, smart_urlquote, is_email_simple
 
 
 # These are tags we will allow in our santized version.
@@ -191,7 +191,7 @@ def convert_links(text, trim_url_limit=None, nofollow=False, autoescape=False):
                 url = smart_urlquote(middle)
             elif simple_url_2_re.match(middle):
                 url = smart_urlquote('http://%s' % middle)
-            elif not ':' in middle and simple_email_re.match(middle):
+            elif ':' not in middle and is_email_simple(middle):
                 local, domain = middle.rsplit('@', 1)
                 try:
                     domain = domain.encode('idna').decode('ascii')
