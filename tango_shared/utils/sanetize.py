@@ -150,6 +150,21 @@ def clean_text(value, topic=False):
     return bleached
 
 
+def is_email_simple(value):
+        """Return True if value looks like an email address."""
+        # An @ must be in the middle of the value.
+        if '@' not in value or value.startswith('@') or value.endswith('@'):
+            return False
+        try:
+            p1, p2 = value.split('@')
+        except ValueError:
+            # value contains more than one @.
+            return False
+        # Dot must be in p2 (e.g. example.com)
+        if '.' not in p2 or p2.startswith('.'):
+            return False
+        return True
+
 
 def convert_links(text, trim_url_limit=None, nofollow=False, autoescape=False):
     """
@@ -162,6 +177,8 @@ def convert_links(text, trim_url_limit=None, nofollow=False, autoescape=False):
 
     Links can have trailing punctuation (periods, commas, close-parens) and
     leading punctuation (opening parens) and it'll still do the right thing.
+    
+    TO-DO: refactor to better leverage existing django.utils.html
 
     """
 
