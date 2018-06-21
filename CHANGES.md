@@ -1,5 +1,8 @@
 # Tango Shared Core Change Log
 
+### 1.1.5
+Additional fixes to reflect Django 1.11
+
 ### 1.1.4
 Update to sanetize to reflect changes in Django 1.11
 
