@@ -13,7 +13,7 @@ from django.template.defaultfilters import urlizetrunc
 from django.utils.encoding import force_text
 from django.utils.safestring import SafeData, mark_safe
 from django.utils.html import TRAILING_PUNCTUATION, WRAPPING_PUNCTUATION, \
-    escape, word_split_re, simple_url_re, simple_url_2_re, smart_urlquote, is_email_simple
+    escape, word_split_re, simple_url_re, simple_url_2_re, smart_urlquote
 
 
 # These are tags we will allow in our santized version.
