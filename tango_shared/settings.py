@@ -89,7 +89,6 @@ TANGO_APPS = (
     'tango_capo',
     'tango_shared',
     'articles',
-    'autotagger',
     'contact_manager',
     'happenings',
     'photos',
@@ -98,7 +97,8 @@ TANGO_APPS = (
     'voting',
     'easy_thumbnails',
 )
-# tango_users is not added by default. Add it to your apps as you wish.
+# tango_users and autotagger are not added by default.
+#  Add them to your apps as you wish.
 
 
 ### Django settings...

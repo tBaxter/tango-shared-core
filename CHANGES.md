@@ -1,5 +1,11 @@
 # Tango Shared Core Change Log
 
+### 1.1.10
+Removed stray autotagger dependency
+
+### 1.1.9
+Fixed on_delete arg for Django 2.0 compatibility
+
 ### 1.1.8
 Fixed import for Django 1.11
 

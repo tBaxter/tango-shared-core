@@ -138,7 +138,9 @@ class BaseUserContentModel(models.Model):
     have consistent sanitization and formatting.
 
     """
-    user = models.ForeignKey(settings.AUTH_USER_MODEL)
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.PROTECT)
     text = models.TextField()
     text_formatted = models.TextField(blank=True)
     post_date = models.DateTimeField(auto_now_add=True)
