@@ -1,4 +1,4 @@
-Django>=1.7.0,<1.9
+Django>=1.11
 
 bleach>=1.2.2
 django-filter>=0.6

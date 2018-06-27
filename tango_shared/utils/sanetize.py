@@ -12,7 +12,7 @@ import markdown
 from django.template.defaultfilters import urlizetrunc
 from django.utils.encoding import force_text
 from django.utils.safestring import SafeData, mark_safe
-from django.utils.html import TRAILING_PUNCTUATION, WRAPPING_PUNCTUATION, \
+from django.utils.html import TRAILING_PUNCTUATION_CHARS, WRAPPING_PUNCTUATION, \
     escape, word_split_re, simple_url_re, simple_url_2_re, smart_urlquote
 
 
@@ -188,10 +188,10 @@ def convert_links(text, trim_url_limit=None, nofollow=False, autoescape=False):
         if '.' in word or ':' in word:
             # Deal with punctuation.
             lead, middle, trail = '', word, ''
-            for punctuation in TRAILING_PUNCTUATION:
-                if middle.endswith(punctuation):
-                    middle = middle[:-len(punctuation)]
-                    trail = punctuation + trail
+            stripped = middle.rstrip(TRAILING_PUNCTUATION_CHARS)
+            if middle != stripped:
+                trail = middle[len(stripped):] + trail
+                middle = stripped
             for opening, closing in WRAPPING_PUNCTUATION:
                 if middle.startswith(opening):
                     middle = middle[len(opening):]
