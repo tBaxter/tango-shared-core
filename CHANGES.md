@@ -1,5 +1,11 @@
 # Tango Shared Core Change Log
 
+### 1.2.3
+Corrected path to request context processor
+
+### 1.2.2
+Corrected typo
+
 ### 1.2.1
 Updated middleware settings
 
