@@ -8,7 +8,5 @@ Markdown>=2.3.1
 Pillow>=2.1.0
 six
 smartypants>=1.6.0.3
-tango-admin>=0.2
-tango-voting>=0.2
 typogrify>=2.0.0
 xmltramp2

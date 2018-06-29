@@ -1,0 +1,41 @@
+{% comment %}
+  Builds generic "top assets" box.
+  Note that you must pass in object and the object model must have get_top_assets() defined.
+  And you really should slice top_assets down in get_top_assets().
+{% endcomment %}
+
+{% load typogrify_tags social_tags video_tags %}
+
+{% with object.get_top_assets as top_assets %}
+  {% if top_assets or object.geocode %}
+    <aside id="top_assets">
+      {% social_links object user %}
+      {% if top_assets %}
+        <div {% if top_assets|length > 1 %}class="slideshow"{% endif %}>
+          {% for asset in top_assets %}
+            {% if asset.image %}
+              <figure class="{% if asset.is_vertical %}vertical{% endif %} {% if asset.caption %}has-caption{% endif %}">
+                <img src="{{ asset.image.url }}" alt="">
+                {% if asset.caption or asset.byline %}
+                  <figcaption class="rs-caption rs-bottom">
+                    {% if asset.byline %}
+                      <span class="author">{{ asset.byline }}</span>
+                    {% endif %}
+                    {% if asset.caption %}{{ asset.caption }}{% endif %}
+                    </figcaption>
+                  {% endif %}
+              </figure>
+            {% else %}
+              <figure data-slide-type="video" title="video">
+                {% show_video asset.video %}
+              </figure>
+            {% endif %}
+          {% endfor %}
+          {% if object.geocode %}
+              <div id="map_canvas" data-slide-type="map"></div>
+          {% endif %}
+        </div>
+      {% endif %}
+    </aside>
+  {% endif %}
+{% endwith %}

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html class="no-js">
+<head>
+  <meta charset="utf-8">
+  {# uncomment if you can't set as a header <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> #}
+  <title>
+    {% block title %}{% endblock %}
+    {{ site.name }}
+    {% block extra_title %}{% endblock %}
+  </title>
+  <meta name="description" content="{% block description %}{% endblock %}">
+  {% block viewport_meta %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+  {% endblock %}
+  {% block extra_meta %}{% endblock extra_meta %}
+  {% block canonical %}{% endblock %}
+  <link rel="shortcut icon" href="{{ STATIC_URL }}img/favicon.png">
+  <link rel="apple-touch-icon" href="{{ STATIC_URL }}img/touch-icon.png">
+
+  <link rel="profile" href="http://microformats.org/profile/hcard">
+  {% block site_styles %}
+    {% if theme %}
+      <link rel="stylesheet" href="{{ STATIC_URL }}themes/{{ theme }}/{{ theme }}.css">
+    {% else %}
+      <link rel="stylesheet" href="{{ STATIC_URL }}css/site.css">
+    {% endif %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/print.css" media="print">
+  {% endblock %}
+
+  {% block htmlshiv %}
+    {# consider a custom modernizr build, placing htmlshiv here. See http://stackoverflow.com/a/16085479 #}
+  {% endblock htmlshiv %}
+
+  {% block extrahead %}{% endblock %}
+  {% block feeds %}{% endblock %}
+</head>
+
+<body id="{% block bodyid %}default{% endblock %}" class="{% block bodyclass %}section_front{% endblock %} {% block extra_body_class %}{% endblock %}">
+  <header role="banner">
+    {% block banner %}
+      <div class="site-name">
+        {% block site_name %}
+          <h1>
+            <a href="/" title="Home">
+              {% block logo %}{{ site.name }}{% endblock %}
+            </a>
+          </h1>
+          {% block nav_tagline %}{% endblock %}
+        {% endblock %}
+      </div>
+    {% endblock %}
+    {% block banner_nav %}{% endblock %}
+  </header>
+  <div id="wrapper">
+    {% block content_top %}{% endblock %}
+    <div id="content-wrapper">
+      {% block messages %}
+        {% if messages %}
+          <ul class="messages">
+            {% for message in messages %}
+              <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                {{ message }}
+              </li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      {% endblock %}
+
+      {% block section_nav %}{% endblock %}
+
+      <main>{% block content %}{% endblock %}</main>
+
+      <div role="complementary">{% block complementary %}{% endblock %}</div>
+
+      {% block content_bottom %}{% endblock %}
+    </div>
+
+    <footer id="footer" role="contentinfo">
+      {% block footer_nav %}
+        <nav role="navigation">{% include 'includes/site_nav.html' %}</nav>
+      {% endblock %}
+      {% block footer %}
+        <div>
+          <p class="right">Powered by <a href="http://tbaxter.github.io/Tango/">Tango</a>
+          <p class="copyright">&copy; {{ now.year }} {{ site.name }}</p>
+        </div>
+      {% endblock %}
+    </footer>
+  </div> <!-- /#wrapper -->
+
+  {# Javascript is at the bottom for faster page loading #}
+  {# see note in head about modernizr at the bottom #}
+  {% block modernizr %}
+    <script src="{{ STATIC_URL }}libs/modernizr-3.1.0.min.js"></script>
+  {% endblock %}
+
+  {% block init_js %}{% endblock %}{# useful for vars and other initializations #}
+
+  {% block site_js %}
+    <script src="{{ STATIC_URL }}js/site-combined-min.js"></script>
+  {% endblock %}
+
+  {% block app_js %}{% endblock %}
+
+  {% block extrascript %}{% endblock %}
+
+  {# asynchronous google analytics: mathiasbynens.be/notes/async-analytics-snippet #}
+  <script>
+    var _gaq = [['_setAccount', '{{ ga_code }}'], ['_trackPageview']];
+    (function(d, t) {
+    var g = d.createElement(t), s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+    })(document, 'script');
+  </script>
+</body>
+</html>
