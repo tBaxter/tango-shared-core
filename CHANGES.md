@@ -1,5 +1,8 @@
 # Tango Shared Core Change Log
 
+### 1.2.1
+Updated middleware settings
+
 ### 1.2.0
 Updated for Django 2.0 compatibility
 
