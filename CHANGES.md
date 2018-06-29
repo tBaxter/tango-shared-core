@@ -1,5 +1,8 @@
 # Tango Shared Core Change Log
 
+### 1.2.4
+Updated is_anonymous check
+
 ### 1.2.3
 Corrected path to request context processor
 
