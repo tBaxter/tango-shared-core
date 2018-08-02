@@ -24,6 +24,8 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'tango_shared.context_processors.site_processor'
+
 ]
 
 TEMPLATES = [
