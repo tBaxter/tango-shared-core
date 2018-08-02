@@ -15,7 +15,7 @@ DATABASES = {
         'NAME': ':memory:',
     }
 }
-ROOT_URLCONF = ''
+ROOT_URLCONF = 'test_urls'
 SITE_ID = 1
 
 #stripped down middleware
