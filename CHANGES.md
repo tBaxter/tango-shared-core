@@ -1,5 +1,8 @@
 # Tango Shared Core Change Log
 
+### 1.3
+Updates for Travis CI and ensuring Django 2.0 compliance
+
 ### 1.2.4
 Updated is_anonymous check
 

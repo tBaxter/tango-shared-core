@@ -29,12 +29,11 @@ class TestSharedContent(TestCase):
         response = self.client.get(reverse('home'))
         static_url = settings.STATIC_URL
         favicon_url = '<link rel="shortcut icon" href="{}img/favicon.png">'.format(static_url)
-        touch_icon = '<link rel="apple-touch-icon" href="{}img/touch-icon.png">'.format(STATIC_URL)
+        touch_icon = '<link rel="apple-touch-icon" href="{}img/touch-icon.png">'.format(static_url)
         self.assertEqual(response.status_code, 200)
         self.assertTrue(favicon_url in response.content)
         self.assertTrue(touch_icon in response.content)
 
-    @unittest.skip("Makes multiple generous assumptions about project behaviour")
     def test_shared_context_processor(self):
         """
         Test results of shared context processor are in template
@@ -84,3 +83,23 @@ class TemplateTagsTests(TestCase):
         output = t.render(c)
         self.assertTrue('facebook' in output)
         self.assertTrue('twitter' in output)
+
+
+class UtilsTests(TestCase):
+    def setUp(self):
+        self.profanities = [
+            ('what the fuck', 'what the smurf'),
+            ('what the FUCK', 'what the SMURF'),
+            ('what the Fuck', 'what the Smurf'),
+            ('we are fucked', 'we are smurfed'),
+            ('what a fucker', 'what a smurfer'),
+            ('what a Fucker', 'what a Smurfer'),
+            ('fucking guy',   'smurfing guy'),
+            ('Fucking guy',   'Smurfing guy'),
+        ]
+
+    def test_profanity_replacement(self):
+        for p in self.profanities:
+            self.assertEqual(clean_text(p[0], p[1])
+
+

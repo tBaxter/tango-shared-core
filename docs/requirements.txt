@@ -1,5 +1,4 @@
-Django>=1.11
-
+Django>=2.0
 bleach>=1.2.2
 django-filter>=0.6
 docutils>=0.10
