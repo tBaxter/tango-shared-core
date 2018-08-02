@@ -7,6 +7,8 @@ from django.template import Template, Context, RequestContext
 from django.test import TestCase
 from django.urls import reverse
 
+from .utils.sanetize import clean_text
+
 
 class DummyModel(models.Model):
     """
@@ -100,6 +102,4 @@ class UtilsTests(TestCase):
 
     def test_profanity_replacement(self):
         for p in self.profanities:
-            self.assertEqual(clean_text(p[0], p[1])
-
-
+            self.assertEqual(clean_text(p[0]), p[1])
