@@ -15,7 +15,7 @@ DATABASES = {
         'NAME': ':memory:',
     }
 }
-
+ROOT_URLCONF = ''
 SITE_ID = 1
 
 #stripped down middleware
