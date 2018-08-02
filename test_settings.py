@@ -5,8 +5,8 @@ INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sites',
-    'voting',
     'tango_shared',
+    'voting',
 )
 
 DATABASES = {
@@ -19,9 +19,9 @@ DATABASES = {
 SITE_ID = 1
 
 #stripped down middleware
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-)
+]

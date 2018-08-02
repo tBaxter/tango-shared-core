@@ -10,3 +10,4 @@ six
 smartypants>=1.6.0.3
 typogrify>=2.0.0
 xmltramp2
+tango-voting>=0.4.1
