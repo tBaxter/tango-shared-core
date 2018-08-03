@@ -50,7 +50,6 @@ class TestSharedContent(TestCase):
         response = self.client.get('/')
         self.assertContains(response, 'site')
         self.assertTrue('now' in response.context)
-        self.assertTrue('year' in response.context)
         self.assertTrue('current_path' in response.context)
         self.assertTrue('last_seen' in response.context)
         self.assertTrue('last_seen_fuzzy' in response.context)
@@ -63,7 +62,7 @@ class TestSharedContent(TestCase):
         with self.settings(PROJECT_NAME='abc123'):
             response = self.client.get('/')
             self.assertTrue('project_name' in response.context)
-            self.assertTrue(response['project_name'], 'abc123')
+            self.assertTrue(response.context['project_name'], 'abc123')
 
 
 class TemplateTagsTests(TestCase):
