@@ -1,7 +1,7 @@
 import datetime
 
 from django.conf import settings
-from django.contrib.sites.models import Site
+from django.contrib.sites.shortcuts import get_current_site
 
 now = datetime.datetime.now()
 one_day_ago = now - datetime.timedelta(days=1)
@@ -23,7 +23,7 @@ def site_processor(request):
         last_seen_fuzzy = one_day_ago
 
     return {
-        'site': Site.objects.get_current(),
+        'site': get_current_site(request),
         'now': now,
         'ga_code': settings.GOOGLE_ANALYTICS_ID,
         'project_name': settings.PROJECT_NAME,
