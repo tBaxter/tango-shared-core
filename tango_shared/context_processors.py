@@ -3,16 +3,14 @@ import datetime
 from django.conf import settings
 from django.contrib.sites.shortcuts import get_current_site
 
-now = datetime.datetime.now()
-one_day_ago = now - datetime.timedelta(days=1)
-
-ALLOWABLE_THEMES = getattr(settings, 'ALLOWABLE_THEMES', None)
-
 
 def site_processor(request):
+    now = datetime.datetime.now()
+    one_day_ago = now - datetime.timedelta(days=1)
+    ALLOWABLE_THEMES = getattr(settings, 'ALLOWABLE_THEMES', None)
     authenticated_request = request.user.is_authenticated
-    if request.user:
-        authenticated_request = request.user.is_authenticated
+
+    # Resolve theme by cookie, user attr, or default, in that order
     theme = request.COOKIES.get('theme', None)
     if not theme:
         theme = getattr(request.user, "theme", None)
@@ -27,8 +25,7 @@ def site_processor(request):
     return {
         'site': get_current_site(request),
         'now': now,
-        'ga_code': settings.GOOGLE_ANALYTICS_ID or None,
-        'project_name': settings.PROJECT_NAME or None,
+        'project_name': getattr(settings, 'PROJECT_NAME', None),
         'current_path': request.get_full_path(),
         'last_seen': last_seen,
         'last_seen_fuzzy': last_seen_fuzzy,
