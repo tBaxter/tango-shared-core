@@ -10,9 +10,9 @@ ALLOWABLE_THEMES = getattr(settings, 'ALLOWABLE_THEMES', None)
 
 
 def site_processor(request):
-    authenticated_request = False
+    authenticated_request = request.user.is_authenticated
     if request.user:
-        authenticated_request = request.user.is_authenticated()
+        authenticated_request = request.user.is_authenticated
     theme = request.COOKIES.get('theme', None)
     if not theme:
         theme = getattr(request.user, "theme", None)
