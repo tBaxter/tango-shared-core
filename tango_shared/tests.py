@@ -41,7 +41,7 @@ class TestSharedContent(TestCase):
     def test_page_resolution(self):
         response = self.client.get('/')
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response.content, 'page for testing')
+        self.assertContains(response, 'page for testing')
 
     def test_shared_context_processor(self):
         """
