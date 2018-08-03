@@ -3,10 +3,11 @@ import datetime
 from django.conf import settings
 from django.contrib.sites.shortcuts import get_current_site
 
+now = datetime.datetime.now()
+one_day_ago = now - datetime.timedelta(days=1)
 
 def site_processor(request):
-    now = datetime.datetime.now()
-    one_day_ago = now - datetime.timedelta(days=1)
+    
     ALLOWABLE_THEMES = getattr(settings, 'ALLOWABLE_THEMES', None)
     authenticated_request = request.user.is_authenticated
 

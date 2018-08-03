@@ -59,11 +59,11 @@ class TestSharedContent(TestCase):
         # These shouldn't exist, based on test setttings:
         self.assertFalse('project_name' in response.context)
 
-    @override_settings(PROJECT_NAME='abc123')
     def test_project_name(self):
-        response = self.client.get('/')
-        self.assertContains(response, 'project_name')
-        self.assertTrue(response['project_name'], 'abc123')
+        with self.settings(PROJECT_NAME='abc123'):
+            response = self.client.get('/')
+            self.assertContains(response, 'project_name')
+            self.assertTrue(response['project_name'], 'abc123')
 
 
 class TemplateTagsTests(TestCase):
