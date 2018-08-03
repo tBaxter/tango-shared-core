@@ -49,7 +49,7 @@ class TestSharedContent(TestCase):
         """
         response = self.client.get('/')
         self.assertContains(response, 'site')
-        self.assertTrue('now' in response)
+        self.assertTrue('now' in response.context)
         self.assertTrue('year' in response.context)
         self.assertTrue('current_path' in response.context)
         self.assertTrue('last_seen' in response.context)
@@ -62,7 +62,7 @@ class TestSharedContent(TestCase):
     def test_project_name(self):
         with self.settings(PROJECT_NAME='abc123'):
             response = self.client.get('/')
-            self.assertContains(response, 'project_name')
+            self.assertTrue('project_name' in response.context)
             self.assertTrue(response['project_name'], 'abc123')
 
 
