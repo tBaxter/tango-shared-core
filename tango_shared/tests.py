@@ -48,7 +48,7 @@ class TestSharedContent(TestCase):
 
         self.assertEqual(response.status_code, 200)
         
-        self.assertTrue('site' in response.content)
+        self.assertTrue('site' in response.context_data)
         self.assertTrue('now' in response.context)
         self.assertTrue('year' in response.context)
         self.assertTrue('ga_code' in response.context)
