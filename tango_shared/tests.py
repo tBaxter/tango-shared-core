@@ -23,8 +23,6 @@ class TestSharedContent(TestCase):
 
     def setUp(self):
         self.slug = 'admin'
-        self.factory = RequestFactory()
-
 
     @unittest.skip("Makes multiple generous assumptions about project behaviour")
     def test_template_media(self):
@@ -60,6 +58,7 @@ class TestSharedContent(TestCase):
 class TemplateTagsTests(TestCase):
     def setUp(self):
         self.test_list = ['apples', 'oranges']
+        self.factory = RequestFactory()
 
     def test_humanized_join(self):
         t = Template('{% load formatting %}{{ mylist|humanized_join }}')
