@@ -7,6 +7,7 @@ from django.http import HttpRequest
 from django.template import Template, Context, RequestContext
 from django.test import TestCase, RequestFactory
 from django.urls import reverse
+from django.views.generic import TemplateView
 
 from .utils.sanetize import clean_text
 
@@ -41,7 +42,10 @@ class TestSharedContent(TestCase):
         """
         Test results of shared context processor are in template
         """
-        response = self.client.get(reverse('home'))
+        request =  RequestFactory().get('/')
+        request.user = AnonymousUser()
+        response = TemplateView.as_view()(request)
+
         self.assertEqual(response.status_code, 200)
         self.assertTrue('site' in response.context)
         self.assertTrue('now' in response.context)
