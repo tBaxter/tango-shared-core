@@ -59,7 +59,7 @@ class TestSharedContent(TestCase):
         # These shouldn't exist, based on test setttings:
         self.assertFalse('project_name' in response.context)
 
-    @override_settings(project_name='abc123')
+    @override_settings(PROJECT_NAME='abc123')
     def test_project_name(self):
         response = self.client.get('/')
         self.assertContains(response, 'project_name')
