@@ -55,8 +55,9 @@ class TestSharedContent(TestCase):
         self.assertTrue('last_seen_fuzzy' in response.context)
         self.assertTrue('theme' in response.context)
         self.assertTrue('authenticated_request' in response.context)
-        # These shouldn't exist, based on test setttings:
-        self.assertFalse('project_name' in response.context)
+        # These shouldn't be set, based on test setttings:
+        self.assertTrue('project_name' in response.context)
+        self.assertTrue(response.context['project_name'], None)
 
     def test_project_name(self):
         with self.settings(PROJECT_NAME='abc123'):
