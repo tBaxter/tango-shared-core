@@ -27,8 +27,8 @@ def site_processor(request):
     return {
         'site': get_current_site(request),
         'now': now,
-        'ga_code': settings.GOOGLE_ANALYTICS_ID,
-        'project_name': settings.PROJECT_NAME,
+        'ga_code': settings.GOOGLE_ANALYTICS_ID or None,
+        'project_name': settings.PROJECT_NAME or None,
         'current_path': request.get_full_path(),
         'last_seen': last_seen,
         'last_seen_fuzzy': last_seen_fuzzy,

@@ -5,7 +5,7 @@ from django.contrib.auth.models import AnonymousUser
 from django.db import models
 from django.http import HttpRequest
 from django.template import Template, Context, RequestContext
-from django.test import TestCase, RequestFactory
+from django.test import TestCase, RequestFactory, override_settings
 from django.urls import reverse
 from django.views.generic import TemplateView
 
@@ -38,27 +38,32 @@ class TestSharedContent(TestCase):
         self.assertTrue(favicon_url in response.content)
         self.assertTrue(touch_icon in response.content)
 
+    def test_page_resolution(self):
+        response = self.client.get('/')
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response.content, 'page for testing')
+
     def test_shared_context_processor(self):
         """
         Test results of shared context processor are in template
         """
         response = self.client.get('/')
-
-        self.assertEqual(response.status_code, 200)
-        # Is it the right page?
-        self.assertContains(response.content, 'page for testing')
         self.assertContains(response, 'site')
-        
-        self.assertTrue('site' in response)
         self.assertTrue('now' in response)
         self.assertTrue('year' in response.context)
-        self.assertTrue('ga_code' in response.context)
-        self.assertTrue('project_name' in response.context)
         self.assertTrue('current_path' in response.context)
         self.assertTrue('last_seen' in response.context)
         self.assertTrue('last_seen_fuzzy' in response.context)
         self.assertTrue('theme' in response.context)
         self.assertTrue('authenticated_request' in response.context)
+        # These shouldn't exist, based on test setttings:
+        self.assertFalse('project_name' in response.context)
+
+    @override_settings(project_name='abc123')
+    def test_project_name(self):
+        response = self.client.get('/')
+        self.assertContains(response, 'project_name')
+        self.assertTrue(response['project_name'], 'abc123')
 
 
 class TemplateTagsTests(TestCase):
