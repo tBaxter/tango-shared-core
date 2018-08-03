@@ -39,7 +39,7 @@ class TestSharedContent(TestCase):
         self.assertTrue(touch_icon in response.content)
 
     def test_page_resolution(self):
-        response = self.client.get('/')
+        response = self.client.get(reverse('home'))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'page for testing')
 
@@ -47,7 +47,7 @@ class TestSharedContent(TestCase):
         """
         Test results of shared context processor are in template
         """
-        response = self.client.get('/')
+        response = self.client.get(reverse('home'))
         self.assertContains(response, 'site')
         self.assertTrue('now' in response.context)
         self.assertTrue('current_path' in response.context)
@@ -61,7 +61,7 @@ class TestSharedContent(TestCase):
 
     def test_project_name(self):
         with self.settings(PROJECT_NAME='abc123'):
-            response = self.client.get('/')
+            response = self.client.get(reverse('home'))
             self.assertTrue('project_name' in response.context)
             self.assertTrue(response.context['project_name'], 'abc123')
 
