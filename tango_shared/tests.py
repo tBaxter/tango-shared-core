@@ -44,7 +44,7 @@ class TestSharedContent(TestCase):
         """
         request =  RequestFactory().get('/')
         request.user = AnonymousUser()
-        response = TemplateView.as_view()(request)
+        response = TemplateView.as_view(template_name="index.html")(request)
 
         self.assertEqual(response.status_code, 200)
         self.assertTrue('site' in response.context)
