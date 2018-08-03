@@ -42,14 +42,15 @@ class TestSharedContent(TestCase):
         """
         Test results of shared context processor are in template
         """
-        request =  RequestFactory().get('/')
-        request.user = AnonymousUser()
-        response = TemplateView.as_view(template_name="index.html")(request)
+        response = self.client.get('/')
 
         self.assertEqual(response.status_code, 200)
+        # Is it the right page?
+        self.assertContains(response.content, 'page for testing')
+        self.assertContains(response, 'site')
         
-        self.assertTrue('site' in response.context_data)
-        self.assertTrue('now' in response.context)
+        self.assertTrue('site' in response)
+        self.assertTrue('now' in response)
         self.assertTrue('year' in response.context)
         self.assertTrue('ga_code' in response.context)
         self.assertTrue('project_name' in response.context)
