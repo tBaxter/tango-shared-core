@@ -57,7 +57,7 @@ class TestSharedContent(TestCase):
         self.assertTrue('authenticated_request' in response.context)
         # These shouldn't be set, based on test setttings:
         self.assertTrue('project_name' in response.context)
-        self.assertTrue(response.context['project_name'], None)
+        self.assertEqual(response.context['project_name'], None)
 
     def test_project_name(self):
         with self.settings(PROJECT_NAME='abc123'):
