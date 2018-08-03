@@ -1,10 +1,11 @@
 import unittest
 
 from django.conf import settings
+from django.contrib.auth.models import AnonymousUser
 from django.db import models
 from django.http import HttpRequest
 from django.template import Template, Context, RequestContext
-from django.test import TestCase
+from django.test import TestCase, RequestFactory
 from django.urls import reverse
 
 from .utils.sanetize import clean_text
@@ -22,6 +23,8 @@ class TestSharedContent(TestCase):
 
     def setUp(self):
         self.slug = 'admin'
+        self.factory = RequestFactory()
+
 
     @unittest.skip("Makes multiple generous assumptions about project behaviour")
     def test_template_media(self):
@@ -80,7 +83,8 @@ class TemplateTagsTests(TestCase):
     def test_social_links(self):
         t = Template('{% load social_tags %}{% social_links object %}')
         obj = DummyModel.objects.create()
-        request = HttpRequest()
+        request = self.factory
+        request.user = AnonymousUser()
         c = RequestContext(request, {"object": obj})
         output = t.render(c)
         self.assertTrue('facebook' in output)
