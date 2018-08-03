@@ -1,4 +1,4 @@
-import django.conf.global_settings import MIDDLEWARE, TEMPLATE_CONTEXT_PROCESSORS
+from django.conf.global_settings import MIDDLEWARE, TEMPLATE_CONTEXT_PROCESSORS
 
 SECRET_KEY = "lorem ipsum"
 
