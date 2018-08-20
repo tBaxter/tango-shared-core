@@ -1,5 +1,10 @@
 # Tango Shared Core Change Log
 
+### 1.4 - Requires Django 2.0+ and Python 3.4+
+Additional tests
+Removed Google analytics from context processor
+Updated test settings
+
 ### 1.3
 Updates for Travis CI and ensuring Django 2.0 compliance
 

@@ -3,8 +3,8 @@ from __future__ import print_function
 import urllib
 
 from django.conf import settings
-from xmltramp2 import xmltramp
 
+import untangle
 
 
 def get_geocode(city, state, street_address="", zipcode=""):
@@ -32,11 +32,10 @@ def get_geocode(city, state, street_address="", zipcode=""):
         location += "+{}".format(zipcode)
 
     url = "http://maps.google.com/maps/geo?q={}&output=xml&key={}".format(location, key)
-    file = urllib.urlopen(url).read()
     try:
-        xml = xmltramp.parse(file)
+        xml = untangle.parse(url)
     except Exception as error:
-        print("Failed to parse xml file {}: {}".format(file, error))
+        print("Failed to parse xml file {}: {}".format(url, error))
         return None
 
     status = str(xml.Response.Status.code)

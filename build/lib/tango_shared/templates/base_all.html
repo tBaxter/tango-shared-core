@@ -77,7 +77,10 @@
 
     <footer id="footer" role="contentinfo">
       {% block footer_nav %}
-        <nav role="navigation">{% include 'includes/site_nav.html' %}</nav>
+        <nav role="navigation">
+          {# uncomment if you want it #}
+          {# include 'includes/site_nav.html' #}
+        </nav>
       {% endblock %}
       {% block footer %}
         <div>

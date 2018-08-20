@@ -8,5 +8,6 @@ Pillow>=2.1.0
 six
 smartypants>=1.6.0.3
 typogrify>=2.0.0
-xmltramp2
+jinja2 # required for typogrify
 tango-voting>=0.4.1
+untangle>=1.1
