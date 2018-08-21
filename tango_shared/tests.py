@@ -34,8 +34,8 @@ class TestSharedContent(TestCase):
         favicon_url = '<link rel="shortcut icon" href="{}img/favicon.png">'.format(static_url)
         touch_icon = '<link rel="apple-touch-icon" href="{}img/touch-icon.png">'.format(static_url)
         self.assertEqual(response.status_code, 200)
-        self.assertTrue(favicon_url in response.data)
-        self.assertTrue(touch_icon in response.data)
+        self.assertTrue(favicon_url in response.context_data)
+        self.assertTrue(touch_icon in response.context_data)
 
     def test_page_resolution(self):
         response = self.client.get(reverse('home'))
