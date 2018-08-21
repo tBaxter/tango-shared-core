@@ -25,7 +25,6 @@ class TestSharedContent(TestCase):
     def setUp(self):
         self.slug = 'admin'
 
-    @unittest.skip("Makes multiple generous assumptions about project behaviour")
     def test_template_media(self):
         """
         Ensures base template has required media files.

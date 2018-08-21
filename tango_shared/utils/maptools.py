@@ -18,11 +18,8 @@ def get_geocode(city, state, street_address="", zipcode=""):
     Most times you'll want to join the return.
 
     """
-    try:
-        key = settings.GMAP_KEY
-    except AttributeError:
-        return "You need to put GMAP_KEY in settings"
-
+    keytype = None
+    url = None
     # build valid location string
     location = ""
     if street_address:
@@ -30,20 +27,37 @@ def get_geocode(city, state, street_address="", zipcode=""):
     location += '{}+{}'.format(city.replace(" ", "+"), state)
     if zipcode:
         location += "+{}".format(zipcode)
-
-    url = "http://maps.google.com/maps/geo?q={}&output=xml&key={}".format(location, key)
-    try:
-        xml = untangle.parse(url)
-    except Exception as error:
-        print("Failed to parse xml file {}: {}".format(url, error))
-        return None
-
-    status = str(xml.Response.Status.code)
-    if status == "200":
-        geocode = str(xml.Response.Placemark.Point.coordinates).split(',')
-         # Flip geocode because geocoder returns long/lat while Maps wants lat/long.
-         # Yes, it's dumb.
-        return (geocode[1], geocode[0])
+    
+    # Resolve which API to use
+    if hasattr(settings, GMAP_KEY):
+        key = settings.GMAP_KEY
+        keytype = 'Google'
+        url = 'https://maps.googleapis.com/maps/api/geocode/xml?address={}&key={}'.format(location, key)
+        try:
+            xml = untangle.parse(url)
+        except Exception as error:
+            print("Failed to parse Google xml file {}: {}".format(url, error))
+            return None
+        status = str(xml.Response.Status.code)
+        if status == "200":
+            geocode = str(xml.Response.Placemark.Point.coordinates).split(',')
+            # Flip geocode because geocoder returns long/lat while Maps wants lat/long.
+            # Yes, it's dumb.
+            return (geocode[1], geocode[0])
+        
+    elif hasattr(settings, LOCATIONIQ_KEY):
+        key = settings.LOCATIONIQ_KEY
+        keytype = "LocationIQ"
+        url = 'https://us1.locationiq.com/v1/search.php?key={}&q={}&format=xml'.format(key, location)
+        try:
+            xml = untangle.parse(url)
+        except Exception as error:
+            print("Failed to parse LocationIQ xml file {}: {}".format(url, error))
+            return None
+        if xml.searchresults.place:
+            lat = xml.searchresults.place['lat']
+            lon = xml.searchresults.place['lon']
+            return (lat, lon)
     else:
-        print(status)
-        return None
+        return "You need to put GMAP_KEY or LOCATIONIQ_KEY in settings."
+

@@ -32,7 +32,7 @@ You already have developer documentation in the admin. This gives you hooks to i
 
 ### Utils
 * Robust user submission sanitization
-* map tools to ease Google Map integration
+* Map tools to ease Google Map integration (Note: You'll need to set `GMAP_KEY` in your settings)
 
 ### JS
 * A solid implementation of Markitup
