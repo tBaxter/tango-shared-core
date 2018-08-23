@@ -34,7 +34,7 @@ class TestSharedContent(TestCase):
         favicon_url = '<link rel="shortcut icon" href="{}img/favicon.png">'.format(static_url)
         touch_icon = '<link rel="apple-touch-icon" href="{}img/touch-icon.png">'.format(static_url)
         self.assertEqual(response.status_code, 200)
-        self.assertEqual('STATIC_URL' in response.context_data)
+        self.assertEqual('STATIC_URL', response.context_data)
         self.assertTrue(favicon_url in response.rendered_content)
         self.assertTrue(touch_icon in response.rendered_content)
 
