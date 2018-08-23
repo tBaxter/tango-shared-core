@@ -1,5 +1,10 @@
 # Tango Shared Core Change Log
 
+### 1.5
+Switched to untangle rather than deprecated xmltramp2
+Allows for LocationIQ geolocation as well as Google (remember to use the right settings)
+Updated tests
+
 ### 1.4 - Requires Django 2.0+ and Python 3.4+
 Additional tests
 Removed Google analytics from context processor
