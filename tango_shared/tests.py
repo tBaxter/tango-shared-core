@@ -32,7 +32,7 @@ class TestSharedContent(TestCase):
         """
         response = self.client.get(reverse('home'))
         self.assertEqual(response.status_code, 200)
-        self.assertTrue(hasattr(settings.STATIC_URL))
+        self.assertTrue(hasattr(settings, 'STATIC_URL'))
         self.assertTrue('STATIC_URL' in response.context)
 
     def test_template_media(self):
