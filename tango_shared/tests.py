@@ -25,16 +25,26 @@ class TestSharedContent(TestCase):
     def setUp(self):
         self.slug = 'admin'
 
+    def test_static_url(self):
+        """
+        Ensures static URL exists and is in context.
+        Note that you should use the static template tag instead, though.
+        """
+        response = self.client.get(reverse('home'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(hasattr(settings.STATIC_URL))
+        self.assertTrue('STATIC_URL' in response.context)
+
     def test_template_media(self):
         """
         Ensures base template has required media files.
+        And that they're resolving correctly.
         """
         response = self.client.get(reverse('home'))
         static_url = settings.STATIC_URL
         favicon_url = '<link rel="shortcut icon" href="{}img/favicon.png">'.format(static_url)
         touch_icon = '<link rel="apple-touch-icon" href="{}img/touch-icon.png">'.format(static_url)
         self.assertEqual(response.status_code, 200)
-        self.assertTrue('STATIC_URL' in response.context)
         self.assertTrue(favicon_url in response.rendered_content)
         self.assertTrue(touch_icon in response.rendered_content)
 
